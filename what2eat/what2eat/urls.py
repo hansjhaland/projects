@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register import views as regv
+from recipe import views as recv
 
 
 urlpatterns = [
     path('', include("register.urls")),
     path('admin/', admin.site.urls),
-    path('register/', regv.signup, name="signup")
+    path('register/', regv.signup, name="signup"),
+    path('recipe/', recv.index, name = "recipe" )
 ]
