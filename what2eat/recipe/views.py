@@ -9,6 +9,7 @@ def index(response):
 
 def recipeshow(response):
     latestRecipeList = Recipe.objects.order_by("-publishedDate")
+    print(latestRecipeList)
     context = {'latestRecipeList':latestRecipeList}
     return render(response, "recipe.html", context)
     
