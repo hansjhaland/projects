@@ -21,7 +21,8 @@ from recipe import views as recv
 
 urlpatterns = [
     path('', include("register.urls")),
+    path('', include("recipe.urls")),
     path('admin/', admin.site.urls),
     path('register/', regv.signup, name="signup"),
-    path('recipe/', recv.index, name = "recipe" )
+    path('recipe/', recv.recipeshow, name = "recipeshow" )
 ]
