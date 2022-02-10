@@ -1,0 +1,20 @@
+
+
+<h1>  Hello this is working :) </h1>
+
+Here we can start working on a signup form, and it can be created by using html (hence filename)
+
+<form method="POST" class="form-group">
+    {% csrf_token %}
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname"><br><br>
+    <label for="dob">Date of birth:</label>
+    <input type="text" id="dob" name="dob"><br><br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email"><br><br>
+    <input type="submit" value="Submit">
+    <br> </br>
+    {{form}}
+  </form>
