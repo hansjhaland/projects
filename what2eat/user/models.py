@@ -5,6 +5,19 @@ from django.db import models
 #Man bruker modeller for å dra informasjon fra database og inn i "appen"
 
 # Create your models here.
+
+class User(models.Model):
+    fname = models.CharField(max_length=200)
+    lname = models.CharField(max_length=200)
+    #email = models.CharField(max_length=200)
+    #dob = models.DateField(max_length=200)
+
+    def __str__(self):
+        return self.fname + " " + self.lname
+
+
+
+"""
 class User(models.Model):
 
 
@@ -41,8 +54,6 @@ class User(models.Model):
             raise Error("Recipe already your list of recipes!")
         return # not sure if needed
 
-        
-
     def removeRecipe(self, recipe):
         if(recipe not in self.recipes):
             raise Error("You dont have this recipe in your list!")
@@ -53,11 +64,11 @@ class User(models.Model):
         self.ratedRecipes[recipe] = stars
 
     def removeRatedRecipe(self, recipe):
-        return   
+        return
 
     def saveToDb(self):
         # Find a way to save this to our db as a JSONobject i think, possibly with the attributes as keys
         return
-        
 
+"""
 

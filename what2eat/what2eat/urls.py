@@ -22,6 +22,6 @@ urlpatterns = [
     path('', userv.index, name="index"),
     path('admin/', admin.site.urls),
     path('register/', userv.signup, name="signup"),
-    path('user/', userv.user, name="user"),
-    path('hello/', userv.hello, name = "hello")
+    path('hello/', userv.hello, name = "hello"),
+    path('user/<int:id>', userv.user, name="user")
 ]

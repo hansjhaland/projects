@@ -1,9 +1,9 @@
+{% extends "user/base.html"%}
 
-
-<h1>  Hello this is working :) </h1>
-
-Here we can start working on a signup form, and it can be created by using html (hence filename)
-
+{% block title %}
+This is the title
+{%endblock%}
+{% block content2%}
 <form method="POST" class="form-group">
     {% csrf_token %}
     <label for="fname">First name:</label>
@@ -13,8 +13,9 @@ Here we can start working on a signup form, and it can be created by using html 
     <label for="dob">Date of birth:</label>
     <input type="text" id="dob" name="dob"><br><br>
     <label for="email">Email:</label>
-    <input type="text" id="email" name="email"><br><br>
-    <input type="submit" value="Submit">
+    <input type="text" id="email" name="email">
     <br> </br>
     {{form}}
+    <input type="submit" value="Submit">
   </form>
+    {%endblock%}
