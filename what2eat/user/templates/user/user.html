@@ -1,4 +1,13 @@
-<h1>User page</h1>
+{% extends "user/base.html" %}
 
-<button><a href="/hello">Click me!</a></button>
+{% block content1 %}
+ <h3>En ny meny</h3>
+{%endblock%}
 
+{% block title %}
+<h2>Min side</h2>
+{%endblock%}
+
+{% block content2 %}
+ <h3>Mine oppskrifter:</h3>
+{%endblock%}
