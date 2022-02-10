@@ -1,5 +1,6 @@
 from turtle import title
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Recipe(models.Model):
@@ -10,4 +11,12 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title+self.publishDate
+
+
+class RecipeForm(ModelForm):
+    class Meta:
+        model = Recipe
+        fields = "__all__"
+        #fields = ["title", "publishedDate", "ingredients", "description"]
+
 

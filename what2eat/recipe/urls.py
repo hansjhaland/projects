@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name = "index"), # if you now go to the home directory, it will go to views.index, and it shows the function named index
-    path("recipe/", views.recipeshow, name ="recipeshow")
+    path("recipe/", views.recipeshow, name ="recipeshow"),
+    path("recipe/form/", views.create_recipe, name ="create_recipe")
 ]
