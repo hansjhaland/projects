@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from register import views as regv
 from recipe import views as recv
+from user import views as userv
 
 
 urlpatterns = [
-    path('', include("register.urls")),
-    path('', include("recipe.urls")),
+    path('', userv.index, name="index"),
     path('admin/', admin.site.urls),
-    path('register/', regv.signup, name="signup"),
+    path('', include("recipe.urls")),
+    path('register/', userv.signup, name="signup"),
+    path('user/', userv.user, name="user"),
+    path('hello/', userv.hello, name = "hello"),
     path('recipe/', recv.recipeshow, name = "recipeshow" )
 ]

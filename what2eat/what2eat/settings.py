@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'register',
     'recipe',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -57,9 +57,10 @@ ROOT_URLCONF = 'what2eat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),
-        os.path.join(BASE_DIR, 'register', 'templates', 'register'),
-        os.path.join(BASE_DIR, 'recipe', 'templates', 'recipe') 
+        'DIRS': [
+        os.path.join(BASE_DIR, 'templates'),
+        os.path.join(BASE_DIR, 'recipe', 'templates', 'recipe'), 
+        os.path.join(BASE_DIR, 'user', 'templates', 'user')  
         ],
         'APP_DIRS': True,
         'OPTIONS': {
