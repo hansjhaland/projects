@@ -7,7 +7,7 @@ from .models import Recipe, RecipeForm
 def index(response):
     return HttpResponse("frrrr")
 
-def recipeshow(response):
+def show_all_recipes(response):
     recipeList = Recipe.objects.all()
     print(recipeList)
     context = {'recipeList':recipeList}
@@ -39,3 +39,7 @@ def create_recipe(request):
         form = RecipeForm()
 
     return render(request, 'recipeForm.html', {'form': form})
+
+def show_recipe(response, id):
+    recipe = Recipe.objects.get(id=id)
+    return render(response, "recipe/selected.html", {"recipe":recipe})

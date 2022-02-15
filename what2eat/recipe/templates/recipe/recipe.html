@@ -7,7 +7,7 @@
 {% block content2 %}
  {%if recipeList %}
     {% for recipe in recipeList %}
-    <p>{{recipe.title}} {{recipe.publishedDate}}</p>
+    <p><a href="/recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
     {% endfor %}
 {% else %}
     <p>Ingen oppskrifter å vise</p>
