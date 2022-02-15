@@ -4,18 +4,9 @@
 This is the title
 {%endblock%}
 {% block content2%}
-<form method="POST" class="form-group">
+<form method="post">
     {% csrf_token %}
-    <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname"><br><br>
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname"><br><br>
-    <label for="dob">Date of birth:</label>
-    <input type="text" id="dob" name="dob"><br><br>
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email">
-    <br> </br>
-    {{form}}
+    {{ form.as_p }}
     <input type="submit" value="Submit">
   </form>
     {%endblock%}

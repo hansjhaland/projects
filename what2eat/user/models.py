@@ -1,27 +1,33 @@
-from msilib.schema import Error
 from pickle import TRUE
 from django.db import models
+from django.forms import ModelForm
 
 #Man bruker modeller for å dra informasjon fra database og inn i "appen"
 
 # Create your models here.
 
 class User(models.Model):
-    fname = models.CharField(max_length=200)
-    lname = models.CharField(max_length=200)
-    #email = models.CharField(max_length=200)
-    #dob = models.DateField(max_length=200)
+    username = models.CharField(max_length=200)
+    # password = models.CharField(max_length=200)
+    fname = models.CharField('First name', max_length=200)
+    lname = models.CharField('Last name',max_length=200)
+    email = models.CharField(max_length=200)
+    dob = models.DateTimeField("Date of birth")
 
     def __str__(self):
         return self.fname + " " + self.lname
 
 
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = "__all__"
 
 """
 class User(models.Model):
 
-
     # ID is created by Django when you add to DB, not sure how to get it in here yet
+
 
     def __init__(self, fname, surname, email, password, dateOfBirth, recipes, ratedRecipes):
 
