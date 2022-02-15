@@ -8,9 +8,12 @@ def index(response):
     return HttpResponse("frrrr")
 
 def recipeshow(response):
-    latestRecipeList = Recipe.objects.order_by("-publishedDate")
-    print(latestRecipeList)
-    context = {'latestRecipeList':latestRecipeList}
+    recipeList = Recipe.objects.all()
+    print(recipeList)
+    context = {'recipeList':recipeList}
+    # latestRecipeList = Recipe.objects.order_by("-publishedDate")
+    # print(latestRecipeList)
+    # context = {'latestRecipeList':latestRecipeList}
     return render(response, "recipe.html", context)
     
 def create_recipe(request):

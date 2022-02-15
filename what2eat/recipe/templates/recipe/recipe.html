@@ -4,6 +4,16 @@
 <p>Her er en oppskrift</p>
 {% endblock %}
 
+{% block content2 %}
+ {%if recipeList %}
+    {% for recipe in recipeList %}
+    <p>{{recipe.title}} {{recipe.publishedDate}}</p>
+    {% endfor %}
+{% else %}
+    <p>Ingen oppskrifter å vise</p>
+{% endif %}
+{%endblock%}
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>

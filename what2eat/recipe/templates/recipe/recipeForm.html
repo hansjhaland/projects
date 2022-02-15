@@ -9,7 +9,7 @@
 {%endblock%}
 
 {% block content2%}
-<form action="/user/1" method="post">
+<form action="" method="post">
     <!-- csrf_token = Cross site request Forgery protection -->
     {% csrf_token %}
     {{ form.as_p }}
