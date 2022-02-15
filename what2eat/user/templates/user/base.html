@@ -1,128 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>What2Eat</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background-color: #f8f9fb;
-}
-
-div {
-    border: #333 1px solid;
-}
-
-#w2e {
-    color: #ee7f3e;
-}
-.topnav {
-  overflow: hidden;
-  background-color: #333333;
-  background-image: linear-gradient(to right, #333333 , #5B5B5B);
-}
-
-.topnav p {
-    font-family: baloo;
-    color: #ddd;
-    float: left;
-    margin-left: 10px;
-    text-align: center;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  float: right;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  height: 100%;
-  color: black;
-}
-.row {
-    height: 500px;
-}
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.header {
-  background-color: #ee7f3e;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-}
-.column1 {
-  float: left;
-  width: 20%;
-  height: 100%;
-  padding: 15px;
-  background-color: #5e463e;
-}
-.column2 {
-  float: left;
-  width: 80%;
-  height: 100%;
-  padding: 15px;
-}
-.catagory{
-    background-color: #fef0e5;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    margin-top: 5px;
-}
-
-
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width:600px) {
-  .column {
-    width: 100%;
-  }
-}
-</style>
+<link rel="stylesheet" type="text/css" href="{% static 'user/base.css' %}">
 </head>
 <body>
 
 <div class="topnav">
     <p>What<span id="w2e">2</span>Eat</p>
-    <a href="#">Link</a>
-    <a href="#">Link</a>
-    <a href="#">Link</a>
+    <a href="#">Logg in</a>
+    <a href="#">My Site</a>
+    <a href="#">Home</a>
 </div>
 
 <div class="row">
   <div class="column1">
     <div class="header">
-        {% block content1 %}
-    {%endblock%}
+        {% block sidenav_title %} <!-- Options from site, ex "My Site options" --> 
+      {%endblock%}
     </div>
-    <button class="catagory">Eksempel</button>
-    <button class="catagory">Eksempel</button>
-   
+    {% block sidenav %} <!-- button linking to ex. new recipe -->
+    {%endblock%}
+
   </div>
   
   <div class="column2">
     <div class="header">
-        {% block title %}
+        {% block page_title %} <!-- Title of page, ex. "My site"-->
         {%endblock%}
     </div>
     <div>
-        {% block content2 %}
+        {% block content %}  <!-- Pgae content, ex. "My recipies"-->
         {%endblock%}
     </div>
   </div>
@@ -130,4 +41,3 @@ div {
 
 </body>
 </html>
-
