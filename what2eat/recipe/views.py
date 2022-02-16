@@ -34,8 +34,8 @@ def create_recipe(request):
             # redirect to a new URL, This gets overidden by on action in html??
             return HttpResponseRedirect('/recipe/')
 
-    # if a GET (or any other method) we'll create a blank form
     else:
+        # if a GET (or any other method) we'll create a blank form
         form = RecipeForm()
 
     return render(request, 'recipeForm.html', {'form': form})
@@ -43,3 +43,15 @@ def create_recipe(request):
 def show_recipe(response, id):
     recipe = Recipe.objects.get(id=id)
     return render(response, "recipe/selected.html", {"recipe":recipe})
+
+def editRecipe(request, id):
+    recipe = Recipe.objects.get(id=id)
+    title = recipe.title
+    publishedDate = recipe.publishedDate
+    ingredients = recipe.ingredients
+    description = recipe.description
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'description':description})
+
+        # ikke save, men lagre endringer
+    return render(request, 'recipeForm.html', {'form':form})
+
