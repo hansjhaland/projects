@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from recipe import views as recv
 from user import views as userv
 
 
 urlpatterns = [
     path('', userv.index, name="index"),
     path('admin/', admin.site.urls),
+    path('', include("recipe.urls")),
     path('register/', userv.signup, name="signup"),
+    # path('user/', userv.user, name="user"),
+    path('recipe/', recv.show_all_recipes, name = "recipeshow" ),
+    path("recipe/form/", recv.create_recipe, name ="create_recipe"),
     path('hello/', userv.hello, name = "hello"),
     path('user/<int:id>', userv.user, name="user")
 ]

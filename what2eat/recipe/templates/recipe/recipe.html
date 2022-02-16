@@ -1,0 +1,29 @@
+{% extends "user/base.html"%}
+
+{% block page_title%}
+<p>Her er oppskriftene</p>
+{% endblock %}
+
+{% block content %}
+ {%if recipeList %}
+    {% for recipe in recipeList %}
+    <p><a href="/recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
+    {% endfor %}
+{% else %}
+    <p>Ingen oppskrifter å vise</p>
+{% endif %}
+{%endblock%}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hei på deg</h1>
+    
+</body>
+</html> -->
