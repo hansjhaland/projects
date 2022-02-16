@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeForm
 
 # Create your views here.
@@ -42,4 +42,12 @@ def create_recipe(request):
 
 def show_recipe(response, id):
     recipe = Recipe.objects.get(id=id)
+
+    if response.method == 'POST':
+        recipe.delete()
+        return redirect('/recipe')
+
     return render(response, "recipe/selected.html", {"recipe":recipe})
+
+
+
