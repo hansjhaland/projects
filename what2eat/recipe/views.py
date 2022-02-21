@@ -52,6 +52,19 @@ def editRecipe(request, id):
     description = recipe.description
     form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'description':description})
 
-        # ikke save, men lagre endringer
+    
+    if (request.method == "POST"):
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            # publishedDate will not be updated here (maybe not let anyone change it later)
+            recipe = Recipe.objects.get(id=id)
+            recipe.ingredients = form.cleaned_data["ingredients"]
+            recipe.description = form.cleaned_data["description"]
+            recipe.title = form.cleaned_data['title']
+            recipe.save()
+            print(recipe.description)
+
+        
+
     return render(request, 'recipeForm.html', {'form':form})
 
