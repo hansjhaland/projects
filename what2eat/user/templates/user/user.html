@@ -1,12 +1,18 @@
 {% extends "user/base.html" %}
 
-{% block sidenav_title %}
- <h3></h3>
+{% block sidenav %}
+    <h6><a href="/recipe/form">Opprett en oppskrift</a></h6>
+    <h6><a href="/feed">vis felles feed</a></h6>
 {%endblock%}
 
 {% block page_title %}
 <h2>{{person.fname}} {{person.lname}}'s Page</h2>
 {%endblock%}
+
+{% block sidenav_title %}
+    <h3>My options</h3>
+{%endblock%}
+
 
 {% block content %}
 <h3>Mine oppskrifter:</h3>

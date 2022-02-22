@@ -73,3 +73,9 @@ def editRecipe(request, id):
 
     return render(request, 'recipeForm.html', {'form':form})
 
+
+def showFeed(response):
+    recipeList = Recipe.objects.filter(public=True)
+    context = {'recipeList':recipeList}
+    return render(response, "feed.html", context)
+

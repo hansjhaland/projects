@@ -1,0 +1,28 @@
+{% extends "user/base.html"%}
+{% load static %}
+
+{% block header_info %} <!-- for linking other stylesheets etc --> 
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
+{%endblock%}
+
+{% block sidenav_title %}
+    <p>Her kommer filterings options</p>
+{%endblock%}
+
+{% block page_title%}
+<p>Feed for alle offetilige oppskrifter</p>
+{% endblock %}
+
+{% block content %}
+ {%if recipeList %}
+    {% for recipe in recipeList %}
+    <a href="/recipe/{{recipe.id}}">
+    <div class="recipeItem">
+        <h3>{{recipe.title}}</h3>
+        <p>Delt: {{recipe.publishedDate}}</p>
+    </div></a>
+    {% endfor %}
+{% else %}
+    <p>Ingen oppskrifter å vise</p>
+{% endif %}
+{%endblock%}

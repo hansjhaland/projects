@@ -30,4 +30,6 @@ def user(response, id):
     person = User.objects.get(id=id)
     recipeList = Recipe.objects.filter(user=id)
     return render(response, "user/user.html", {"person":person, "recipeList":recipeList})
+
+
     
