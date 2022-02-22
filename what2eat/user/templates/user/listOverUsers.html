@@ -1,0 +1,20 @@
+{% extends "user/base.html" %}
+
+{% block page_title %}
+<h2>Liste over alle brukerne i systemet</h2>
+{%endblock%}
+
+{% block sidenav_title %}
+    <h3>ikke relevant</h3>
+{%endblock%}
+
+
+{% block content %}
+    {%if userList %}
+        {% for user in userList %}
+            <p><a href="/user/{{user.id}}">{{user.fname}} {{user.lname}}</a></p>
+        {% endfor %}
+    {% else %}
+        <p>Ingen oppskrifter å vise</p>
+    {% endif %}
+{%endblock%}

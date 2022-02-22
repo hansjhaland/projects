@@ -31,5 +31,9 @@ def user(response, id):
     recipeList = Recipe.objects.filter(user=id)
     return render(response, "user/user.html", {"person":person, "recipeList":recipeList})
 
+def listAllUsers(response):
+    userList = User.objects.all()
+    return render(response, "listOverUsers.html", {"userList":userList})
+
 
     
