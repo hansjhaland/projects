@@ -4,6 +4,8 @@ from django.contrib.auth import login, authenticate # going to be used later
 from django.contrib.auth.forms import UserCreationForm
 from user.models import User
 from user.models import UserForm
+from user.models import Login
+from user.models import LoginForm
 
 # Create your views here.
 
@@ -28,3 +30,11 @@ def hello(response):
 def user(response, id):
     person = User.objects.get(id=id)
     return render(response, "user/user.html", {"name":(person.fname + ' ' + person.lname)})
+
+def login(request):
+    if( request.method == "post"):
+        form = Login(request.POST)
+    else:
+        form = LoginForm()
+    
+    return render(request, "login.html", {"form":form})
