@@ -28,5 +28,6 @@ urlpatterns = [
     path('recipe/', recv.show_all_recipes, name = "recipeshow" ),
     path("recipe/form/", recv.create_recipe, name ="create_recipe"),
     path('hello/', userv.hello, name = "hello"),
-    path('user/<int:id>', userv.user, name="user")
+    path('user/<int:id>', userv.user, name="user"),
+    path('login/', userv.login, name = "login")
 ]

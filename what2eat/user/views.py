@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate # going to be used later
 from django.contrib.auth.forms import UserCreationForm
 from user.models import User
 from user.models import UserForm
-from user.models import Login
+# from user.models import Login
 from user.models import LoginForm
 
 # Create your views here.
@@ -33,8 +33,19 @@ def user(response, id):
 
 def login(request):
     if( request.method == "post"):
-        form = Login(request.POST)
+        form = LoginForm(request.POST)
+    # user = User.objects.filter(id = id)
+    # if( request.method == "post"):
+    #     form = Login(request.POST)
     else:
         form = LoginForm()
     
     return render(request, "login.html", {"form":form})
+# def show_recipe(response, id):
+#     recipe = Recipe.objects.get(id=id)
+
+#     if response.method == 'POST':
+#         recipe.delete()
+#         return redirect('/recipe')
+
+#     return render(response, "recipe/selected.html", {"recipe":recipe})

@@ -2,8 +2,6 @@ from pickle import TRUE
 from django.db import models
 from django.forms import ModelForm
 
-# from user.views import user
-
 #Man bruker modeller for å dra informasjon fra database og inn i "appen"
 
 # Create your models here.
@@ -24,18 +22,21 @@ class UserForm(ModelForm):
         model = User
         fields = "__all__"
 
-
-class Login(models.Model):
-    username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.username + self.password
-
 class LoginForm(ModelForm):
     class Meta:
-        model = Login
-        fields = "__all__"
+        model = User
+        fields = ['username', 'password']
+# class Login(models.Model):
+#     username = models.CharField(max_length=200)
+#     password = models.CharField(max_length=200)
+
+#     def __str__(self):
+#         return self.username + self.password
+
+# class LoginForm(ModelForm):
+#     class Meta:
+#         model = Login
+#         fields = "__all__"
 
 """
 class User(models.Model):
