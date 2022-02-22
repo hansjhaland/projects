@@ -1,11 +1,13 @@
 from datetime import datetime
 from django.test import TestCase
 from .models import Recipe
+from user.models import User
 
 # Create your tests here.
 class RecipeTestCase(TestCase):
     def setUp(self):
-        Recipe.objects.create(title="Pizza", ingredients="Cheese, Meat", description="This is very good :)")
+        User.objects.create(username="olanor", password="olanor123", fname="Ola", lname="Normann", email="ola@normann.no")
+        Recipe.objects.create(title="Pizza", ingredients="Cheese, Meat", description="This is very good :)", user_id=1)
 
     def test_recipe_exist(self):
         self.assertTrue(Recipe.objects.filter(title="Pizza").exists())

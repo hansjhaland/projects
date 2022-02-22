@@ -5,9 +5,16 @@
 {%endblock%}
 
 {% block page_title %}
-<h2>{{name}}'s Page</h2>
+<h2>{{person.fname}} {{person.lname}}'s Page</h2>
 {%endblock%}
 
 {% block content %}
- <h3>Mine oppskrifter:</h3>
+<h3>Mine oppskrifter:</h3>
+    {%if recipeList %}
+        {% for recipe in recipeList %}
+            <p><a href="/recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
+        {% endfor %}
+    {% else %}
+        <p>Ingen oppskrifter å vise</p>
+    {% endif %}
 {%endblock%}
