@@ -1,4 +1,5 @@
 from multiprocessing import context
+from unicodedata import category
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeForm
@@ -26,10 +27,12 @@ def create_recipe(request):
         if form.is_valid():
             print("the form is valid")
             # process the data in form.cleaned_data as required
-            # title = form.cleaned_data["title"]
-            # publishedDate = form.cleaned_data["publishedDate"]
-            # ingredients = form.cleaned_data["ingredients"]
-            # description = form.cleaned_data["description"]
+            title = form.cleaned_data["title"]
+            ingredients = form.cleaned_data["ingredients"]
+            description = form.cleaned_data["description"]
+            category = form.cleaned_data["category"]
+            
+
             form.save()
             # redirect to a new URL, This gets overidden by on action in html??
             return HttpResponseRedirect('/recipe/')

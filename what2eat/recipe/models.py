@@ -10,6 +10,9 @@ class Recipe(models.Model):
     ingredients = models.CharField(max_length=300)
     description = models.CharField(max_length=1000)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    breakfast, lunch, dinner = "Breakfast", "Lunch", "Dinner"
+    categoryChoices = [(breakfast, 'Breakfast'), (lunch, 'Lunch'),(dinner, 'Dinner')]
+    category = models.CharField(max_length=10,choices = categoryChoices, default=dinner)
 
     def __str__(self):
         return self.title
