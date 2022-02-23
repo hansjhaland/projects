@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeForm
+from user.models import User
 
 # Create your views here.
 def index(response):
@@ -40,14 +41,15 @@ def create_recipe(request):
 
     return render(request, 'recipeForm.html', {'form': form})
 
-def show_recipe(response, id):
+def show_recipe(response, id, userID):
     recipe = Recipe.objects.get(id=id)
+    user = User.objects.get(id=userID)
 
     if response.method == 'POST':
         recipe.delete()
         return redirect('/recipe')
 
-    return render(response, "recipe/selected.html", {"recipe":recipe})
+    return render(response, "recipe/selected.html", {"recipe":recipe, "user":user})
 
 def editRecipe(request, id):
     recipe = Recipe.objects.get(id=id)
@@ -74,8 +76,9 @@ def editRecipe(request, id):
     return render(request, 'recipeForm.html', {'form':form})
 
 
-def showFeed(response):
+def showFeed(response, userID):
     recipeList = Recipe.objects.filter(public=True)
     context = {'recipeList':recipeList}
+    user = User.objects.get(id=userID)
     return render(response, "feed.html", context)
 

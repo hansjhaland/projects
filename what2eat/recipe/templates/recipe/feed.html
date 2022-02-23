@@ -16,10 +16,12 @@
 {% block content %}
  {%if recipeList %}
     {% for recipe in recipeList %}
-    <a href="/recipe/{{recipe.id}}">
+    <a href="{{user.id}}/recipe/{{recipe.id}}">
     <div class="recipeItem">
         <h3>{{recipe.title}}</h3>
-        <p>Delt: {{recipe.publishedDate}}</p>
+        <p>Delt: {{recipe.publishedDate}}</p> 
+        <p>Bruker: {{recipe.user}} </p>
+        <p> brukerid: {{user.fname}}</p>
     </div></a>
     {% endfor %}
 {% else %}
