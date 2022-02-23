@@ -17,12 +17,14 @@ def show_all_recipes(response):
     # context = {'latestRecipeList':latestRecipeList}
     return render(response, "recipe.html", context)
     
-def create_recipe(request):
-    print("Her er jeg")
+def create_recipe(request, userID):
+    #print("Her er jeg")
+    user = User.objects.get(id=userID)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = RecipeForm(request.POST)
+        #form.fields['user'].initial = user
         # check whether it's valid:
         if form.is_valid():
             print("the form is valid")
@@ -31,7 +33,9 @@ def create_recipe(request):
             # publishedDate = form.cleaned_data["publishedDate"]
             # ingredients = form.cleaned_data["ingredients"]
             # description = form.cleaned_data["description"]
-            form.save()
+            recipe = form.save()
+            recipe.user = user
+            
             # redirect to a new URL, This gets overidden by on action in html??
             return HttpResponseRedirect('/recipe/')
 
@@ -39,7 +43,7 @@ def create_recipe(request):
         # if a GET (or any other method) we'll create a blank form
         form = RecipeForm()
 
-    return render(request, 'recipeForm.html', {'form': form})
+    return render(request, 'recipeForm.html', {'form': form, 'user':user})
 
 def show_recipe(response, id, userID):
     recipe = Recipe.objects.get(id=id)
@@ -51,8 +55,9 @@ def show_recipe(response, id, userID):
 
     return render(response, "recipe/selected.html", {"recipe":recipe, "user":user})
 
-def editRecipe(request, id):
+def editRecipe(request, id, userID):
     recipe = Recipe.objects.get(id=id)
+    user = User.objects.get(id=userID)
     title = recipe.title
     publishedDate = recipe.publishedDate
     ingredients = recipe.ingredients
@@ -73,12 +78,12 @@ def editRecipe(request, id):
 
         
 
-    return render(request, 'recipeForm.html', {'form':form})
+    return render(request, 'recipeForm.html', {'form':form, 'user':user})
 
 
 def showFeed(response, userID):
     recipeList = Recipe.objects.filter(public=True)
-    context = {'recipeList':recipeList}
     user = User.objects.get(id=userID)
+    context = {'recipeList':recipeList, 'user':user}
     return render(response, "feed.html", context)
 

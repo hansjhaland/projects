@@ -8,8 +8,12 @@
 <p>{{recipe.publishedDate}}</p>
 <p>{{recipe.ingredients}}</p>
 <p>{{recipe.description}}</p>
+<p>Bruker: {{recipe.user}} </p>
+{%if recipe.user.id == user.id%}
 <form action="#" method="post"> 
     {% csrf_token %}
     <input type="submit", name="delete", value="delete">
 </form>
+<a href="/{{user.id}}/recipe/edit/{{recipe.id}}"><button> Edit </button></a>
+{%endif%}
 {%endblock%}

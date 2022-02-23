@@ -9,7 +9,7 @@
   }
   
   div {
-      
+
   }
   
   #w2e {
@@ -116,4 +116,20 @@
   input[type=submit]:hover {
     background-color: #f88f7c;
   }
+
+  button {
+    width: 100%;
+    background-color: #ffa291;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background-color: #f88f7c;
+  }
+
 

@@ -1,11 +1,11 @@
 {% extends "user/base.html"%}
 
 {%block page_title %}
-<h1>Her kan du skrive inn en oppskrift</h1>
+<h1>Her kan {{user}} skrive inn en oppskrift</h1>
 {%endblock%}
 
 {% block sidenav_title %}
-<p>Lag en oppskrift!</p>
+<p> lag en oppskrift!</p>
 {%endblock%}
 
 {% block content%}
@@ -13,6 +13,7 @@
     <!-- csrf_token = Cross site request Forgery protection -->
     {% csrf_token %}
     {{ form.as_p }}
+    {{form.recipe.user}}
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
