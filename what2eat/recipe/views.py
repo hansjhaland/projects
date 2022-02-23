@@ -23,7 +23,8 @@ def create_recipe(request, userID):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, {'user': user})
+
         #form.fields['user'].initial = user
         # check whether it's valid:
         if form.is_valid():
@@ -33,9 +34,8 @@ def create_recipe(request, userID):
             # publishedDate = form.cleaned_data["publishedDate"]
             # ingredients = form.cleaned_data["ingredients"]
             # description = form.cleaned_data["description"]
-            recipe = form.save()
-            recipe.user = user
-            
+           
+            form.save()
             # redirect to a new URL, This gets overidden by on action in html??
             return HttpResponseRedirect('/recipe/')
 
