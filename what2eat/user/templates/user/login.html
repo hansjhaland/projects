@@ -1,13 +1,22 @@
 {% extends "user/base.html" %}
 
-{% block sidenav_title %}
- <h3></h3>
-{%endblock%}
-
 {% block page_title %}
 <h2>Logg inn</h2>
 {%endblock%}
 
+{% block sidenav %} 
+{%endblock%}
+
 {% block content %}
- <h3></h3>
+<div>
+    <form action = "", method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit", value="Logg inn">
+    </form>
+    <form action="/register/" method="post"> 
+        {% csrf_token %}
+        <input type="submit", value="Registrer ny bruker">
+    </form>
+  </div>
 {%endblock%}
