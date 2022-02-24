@@ -38,16 +38,13 @@ def user(response, id):
     return render(response, "user/user.html", {"person":person, "recipeList":recipeList})
 
 def login(request):
-    print("hellooo folkens")
-    if( request.method == "post"):
+    if( request.method == "POST"):
         form = LoginForm(request.POST)
-        print(form.is_valid() + "hallo")
         if form.is_valid():
             form_data = form.cleaned_data
             input_username = form_data['username']
             input_password = form_data['password']
-            print(input_username, input_password)
-            if User.objects.filter(input_username).exists():
+            if User.objects.filter(username = input_username).exists():
                 user = User.objects.get(username = input_username)
                 if user.password == input_password:
                     return HttpResponseRedirect('/user/%i' % user.id)
