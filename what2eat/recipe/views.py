@@ -23,9 +23,9 @@ def create_recipe(request, userID):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = RecipeForm(request.POST, {'user': user})
+        form = RecipeForm(request.POST)
+        #print(form.data["user"])
 
-        #form.fields['user'].initial = user
         # check whether it's valid:
         if form.is_valid():
             print("the form is valid")
@@ -36,8 +36,8 @@ def create_recipe(request, userID):
             # description = form.cleaned_data["description"]
            
             form.save()
-            # redirect to a new URL, This gets overidden by on action in html??
-            return HttpResponseRedirect('/recipe/')
+            # redirect to a new URL, This gets overidden by on action in html if anything is written there
+            return HttpResponseRedirect("/"+form.data["user"]+ "/")
 
     else:
         # if a GET (or any other method) we'll create a blank form
@@ -45,7 +45,7 @@ def create_recipe(request, userID):
 
     return render(request, 'recipeForm.html', {'form': form, 'user':user})
 
-def show_recipe(response, id, userID):
+def show_recipe(response, userID, id):
     recipe = Recipe.objects.get(id=id)
     user = User.objects.get(id=userID)
 
@@ -62,7 +62,7 @@ def editRecipe(request, id, userID):
     publishedDate = recipe.publishedDate
     ingredients = recipe.ingredients
     description = recipe.description
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'description':description})
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'description':description, 'user':user})
 
     
     if (request.method == "POST"):
@@ -75,8 +75,6 @@ def editRecipe(request, id, userID):
             recipe.title = form.cleaned_data['title']
             recipe.save()
             print(recipe.description)
-
-        
 
     return render(request, 'recipeForm.html', {'form':form, 'user':user})
 

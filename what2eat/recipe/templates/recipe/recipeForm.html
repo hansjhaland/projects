@@ -12,31 +12,9 @@
 <form action="" method="post">
     <!-- csrf_token = Cross site request Forgery protection -->
     {% csrf_token %}
-    {{ form.as_p }} 
+    {{ form.as_p}} 
+    <input type='hidden' name="user" value="{{user.id}}" />
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
 
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <-- the from data should be sent to the url specifed in on action -->
-    <!-- POST: create something new, make changes in the database -->
-    <form action="/user/" method="post">
-        <!-- csrf_token = Cross site request Forgery protection -->
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-
-</html> -->

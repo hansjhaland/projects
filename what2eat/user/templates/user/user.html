@@ -1,8 +1,8 @@
 {% extends "user/base.html" %}
 
 {% block sidenav %}
-    <h6><a href="/recipe/form">Opprett en oppskrift</a></h6>
-    <h6><a href="/feed">vis felles feed</a></h6>
+    <h6><a href="recipe/form">Opprett en oppskrift</a></h6>
+    <h6><a href="feed">vis felles feed</a></h6>
 {%endblock%}
 
 {% block page_title %}
@@ -18,7 +18,7 @@
 <h3>Mine oppskrifter:</h3>
     {%if recipeList %}
         {% for recipe in recipeList %}
-            <p><a href="/recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
+            <p><a href="recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
         {% endfor %}
     {% else %}
         <p>Ingen oppskrifter å vise</p>

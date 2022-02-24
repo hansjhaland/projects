@@ -1,5 +1,7 @@
+from tkinter import HIDDEN, Widget
 from turtle import title
 from django.db import models
+from django import forms
 from django.forms import ModelForm
 from user.models import User
 
@@ -20,9 +22,10 @@ class RecipeForm(ModelForm):
     class Meta:
         model = Recipe
         fields = "__all__"
-        exclude = ["user"]
-        
-
+        #exclude = ["user"]
+        widgets = {
+             "user": forms.HiddenInput()
+        }
         #fields = ["title", "publishedDate", "ingredients", "description"]
 
 

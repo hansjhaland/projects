@@ -12,7 +12,7 @@
 {% block content %}
     {%if userList %}
         {% for user in userList %}
-            <p><a href="/user/{{user.id}}">{{user.fname}} {{user.lname}}</a></p>
+            <p><a href="/{{user.id}}">{{user.fname}} {{user.lname}}</a></p>
         {% endfor %}
     {% else %}
         <p>Ingen oppskrifter å vise</p>
