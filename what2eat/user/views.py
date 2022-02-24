@@ -60,3 +60,4 @@ def login(request):
         print("Her er det noe feil")
     
     return render(request, "login.html", {"form":form})
+
