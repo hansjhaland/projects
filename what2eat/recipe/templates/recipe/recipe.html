@@ -4,7 +4,25 @@
 <p>Her er oppskriftene</p>
 {% endblock %}
 
+{% block sidenav %} <!-- button linking to ex. new recipe -->
+<h2>Filter by categories</h2>
+
+<input type="checkbox" id="breakfastCheckBox" name="Breakfast" value="Breaksfast" >
+<label for = "breakfastCheckBox" > Breakfast </label>
+<br> </br>
+<input type="checkbox" id="lunchCheckBox" name="Lunch" value="Lunch" >
+<label for = "lunchCheckBox" > Lunch </label>
+<br> </br>
+<input type="checkbox" id="dinnerCheckbox" name="Dinner" value = "Dinner" >
+<label for = "dinnerCheckbox" > Dinner </label>
+<br> </br>
+<button type="Submit" id="filterButton"  name="filterButton" value="filterButton">Filter</button>
+
+
+
+    {%endblock%}
 {% block content %}
+
  {%if recipeList %}
     {% for recipe in recipeList %}
     <p><a href="/recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>

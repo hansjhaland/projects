@@ -1,3 +1,4 @@
+from msilib.schema import CheckBox
 from multiprocessing import context
 from unicodedata import category
 from django.http import HttpResponse, HttpResponseRedirect
@@ -16,7 +17,15 @@ def show_all_recipes(response):
     # print(latestRecipeList)
     # context = {'latestRecipeList':latestRecipeList}
     return render(response, "recipe.html", context)
-    
+
+
+def show_selected_recipes(response):
+    recipeList = Recipe.objects.filter(category="Breakfast")
+    print(recipeList)
+    context = {'recipeList':recipeList}
+    return render(response, "recipe.html", context)
+    #This is unfinished, but its purpose is to filter out the selected categories to the reciepe/filter.html
+
 def create_recipe(request):
     print("Her er jeg")
     # if this is a POST request we need to process the form data
