@@ -4,23 +4,43 @@ from unicodedata import category
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeForm
+from .forms import categoryForm
 
 # Create your views here.
 def index(response):
     return HttpResponse("frrrr")
 
-def show_all_recipes(response):
+def show_all_recipes(request):
     recipeList = Recipe.objects.all()
     print(recipeList)
-    context = {'recipeList':recipeList}
+    context = {'recipeList':recipeList, 'form': categoryForm()}
+
+    if request.method == "POST":
+        form = categoryForm(request.POST)
+
+        if form.is_valid():
+            
+            option = form.cleaned_data
+            print (option)
+            if (option.get('option') ==  "breakfast"):
+                recipeList = Recipe.objects.filter(category="Breakfast")
+            if (option.get('option') == "lunch" ):
+                recipeList = Recipe.objects.filter(category="Lunch")
+            if (option.get('option') == "dinner"):
+                recipeList = Recipe.objects.filter(category="Dinner")
+            print(recipeList)
+            context = {'recipeList': recipeList, "form":categoryForm()}
+        return render(request, "recipe.html", context)
+
+
     # latestRecipeList = Recipe.objects.order_by("-publishedDate")
     # print(latestRecipeList)
     # context = {'latestRecipeList':latestRecipeList}
-    return render(response, "recipe.html", context)
+    return render(request, "recipe.html", context)
 
 
 def show_selected_recipes(response):
-    recipeList = Recipe.objects.filter(category="Breakfast")
+    recipeList = Recipe.objects.filter(category="Lunch")
     print(recipeList)
     context = {'recipeList':recipeList}
     return render(response, "recipe.html", context)

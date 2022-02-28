@@ -26,3 +26,4 @@ class RecipeForm(ModelForm):
         #fields = ["title", "publishedDate", "ingredients", "description"]
 
 
+
