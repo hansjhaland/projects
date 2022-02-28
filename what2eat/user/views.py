@@ -8,19 +8,29 @@ from user.models import UserForm
 # from user.models import Login
 from user.models import LoginForm
 from recipe.models import Recipe
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 
 def index(response):
     return HttpResponse("Hello everyone, this is supposed to be the mainpage, this should probably be in a separate 'app', but for now this will have to do.\n This is now inside our 'register-app'")
 
-def signup(request):
-    if( request.method == "post"):
+def register(request):
+    if( request.method == "POST"):
         form = UserForm(request.POST)
         if(form.is_valid()):
-            #Here we save a new user based on information from the form if valid
+             #Here we save a new user based on information from the form if valid
             #Here we can navigate to /user maybe 
-            pass
+            form_data = form.cleaned_data
+            input_username = form_data['username']
+            if User.objects.filter(username = input_username).exists() == False:
+                form.save()               
+                return HttpResponseRedirect('/')
+            else:
+                raise form.ValidationError(
+                    ('Username exists'),
+                    code = 'invalid',
+                )
     else:
         form = UserForm()
     
@@ -55,7 +65,7 @@ def login(request):
     #     form = Login(request.POST)
     else:
         form = LoginForm()
-        print("Her er det noe feil")
+        # print("Her er det noe feil")
     
     return render(request, "login.html", {"form":form})
 
