@@ -12,9 +12,6 @@ from django.core.exceptions import ValidationError
 
 # Create your views here.
 
-def index(response):
-    return HttpResponse("Hello everyone, this is supposed to be the mainpage, this should probably be in a separate 'app', but for now this will have to do.\n This is now inside our 'register-app'")
-
 def register(request):
     if( request.method == "POST"):
         form = UserForm(request.POST)
@@ -36,16 +33,13 @@ def register(request):
     
     return render(request, "register.html", {"form":form})
 
-def hello(response):
-    return HttpResponse("Hello the redirect works!")
-
 # def user(response, id):
 #     person = User.objects.get(id=id)
 #     return render(response, "user/user.html", {"name":(person.fname + ' ' + person.lname)})
 def user(response, id):
-    person = User.objects.get(id=id)
+    user = User.objects.get(id=id)
     recipeList = Recipe.objects.filter(user=id)
-    return render(response, "user/user.html", {"person":person, "recipeList":recipeList})
+    return render(response, "user/user.html", {"user":user, "recipeList":recipeList})
 
 def login(request):
     print("hellooo folkens")
@@ -58,7 +52,7 @@ def login(request):
             if User.objects.filter(username = input_username).exists():
                 user = User.objects.get(username = input_username)
                 if user.password == input_password:
-                    return HttpResponseRedirect('/user/%i' % user.id)
+                    return HttpResponseRedirect('/%i' % user.id)
             
     # user = User.objects.filter(id = id)
     # if( request.method == "post"):
@@ -69,3 +63,9 @@ def login(request):
     
     return render(request, "login.html", {"form":form})
 
+def listAllUsers(response):
+    userList = User.objects.all()
+    return render(response, "listOverUsers.html", {"userList":userList})
+
+
+    

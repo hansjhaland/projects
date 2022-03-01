@@ -1,14 +1,9 @@
-from msilib.schema import CheckBox
-from multiprocessing import context
-from unicodedata import category
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Recipe, RecipeForm
-from .forms import categoryForm
+from .models import Recipe, RecipeForm, categoryForm
+from user.models import User
 
 # Create your views here.
-def index(response):
-    return HttpResponse("frrrr")
 
 def show_all_recipes(request):
     recipeList = Recipe.objects.all()
@@ -23,14 +18,14 @@ def show_all_recipes(request):
             option = form.cleaned_data
             print (option)
             if (option.get('option') ==  "breakfast"):
-                recipeList = Recipe.objects.filter(category="Breakfast")
+                recipeList = Recipe.objects.filter(category="breakfast")
             if (option.get('option') == "lunch" ):
-                recipeList = Recipe.objects.filter(category="Lunch")
+                recipeList = Recipe.objects.filter(category="lunch")
             if (option.get('option') == "dinner"):
-                recipeList = Recipe.objects.filter(category="Dinner")
+                recipeList = Recipe.objects.filter(category="dinner")
             print(recipeList)
             context = {'recipeList': recipeList, "form":categoryForm()}
-        return render(request, "recipe.html", context)
+        return render(request, "feed.html", context)
 
 
     # latestRecipeList = Recipe.objects.order_by("-publishedDate")
@@ -38,20 +33,16 @@ def show_all_recipes(request):
     # context = {'latestRecipeList':latestRecipeList}
     return render(request, "recipe.html", context)
 
-
-def show_selected_recipes(response):
-    recipeList = Recipe.objects.filter(category="Lunch")
-    print(recipeList)
-    context = {'recipeList':recipeList}
-    return render(response, "recipe.html", context)
-    #This is unfinished, but its purpose is to filter out the selected categories to the reciepe/filter.html
-
-def create_recipe(request):
-    print("Her er jeg")
+    
+def create_recipe(request, userID):
+    #print("Her er jeg")
+    user = User.objects.get(id=userID)
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = RecipeForm(request.POST)
+        #print(form.data["user"])
+
         # check whether it's valid:
         if form.is_valid():
             print("the form is valid")
@@ -63,31 +54,35 @@ def create_recipe(request):
             
 
             form.save()
-            # redirect to a new URL, This gets overidden by on action in html??
-            return HttpResponseRedirect('/recipe/')
+            # redirect to a new URL, This gets overidden by on action in html if anything is written there
+            return HttpResponseRedirect("/"+form.data["user"]+ "/")
 
     else:
         # if a GET (or any other method) we'll create a blank form
         form = RecipeForm()
 
-    return render(request, 'recipeForm.html', {'form': form})
+    return render(request, 'recipeForm.html', {'form': form, 'user':user})
 
-def show_recipe(response, id):
+def show_recipe(request, userID, id):
     recipe = Recipe.objects.get(id=id)
+    user = User.objects.get(id=userID)
 
-    if response.method == 'POST':
+    if request.method == 'POST':
         recipe.delete()
-        return redirect('/recipe')
+        return redirect('/%i' % userID)
 
-    return render(response, "recipe/selected.html", {"recipe":recipe})
+    return render(request, "recipe/selected.html", {"recipe":recipe, "user":user})
 
-def editRecipe(request, id):
+def editRecipe(request, id, userID):
     recipe = Recipe.objects.get(id=id)
+    user = User.objects.get(id=userID)
     title = recipe.title
     publishedDate = recipe.publishedDate
     ingredients = recipe.ingredients
     description = recipe.description
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'description':description})
+    public = recipe.public
+    category = recipe.category
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'user':user})
 
     
     if (request.method == "POST"):
@@ -98,10 +93,43 @@ def editRecipe(request, id):
             recipe.ingredients = form.cleaned_data["ingredients"]
             recipe.description = form.cleaned_data["description"]
             recipe.title = form.cleaned_data['title']
+            recipe.public = form.cleaned_data['public']
+            recipe.category = form.cleaned_data["category"]
+            print(recipe.public)
             recipe.save()
             print(recipe.description)
 
-        
+    return render(request, 'recipeForm.html', {'form':form, 'user':user})
 
-    return render(request, 'recipeForm.html', {'form':form})
 
+def showFeed(request, userID):
+    recipeList = Recipe.objects.filter(public=True)
+    user = User.objects.get(id=userID)
+    #return render(response, "feed.html", context)
+    print(recipeList)
+    context = {'recipeList':recipeList, 'form': categoryForm(), 'user':user}
+
+    if request.method == "POST":
+        form = categoryForm(request.POST)
+
+        if form.is_valid():
+            
+            option = form.cleaned_data
+            print (option)
+            if (option.get('option') ==  "all"):
+                recipeList = Recipe.objects.filter(public=True)
+            if (option.get('option') ==  "breakfast"):
+                recipeList = Recipe.objects.filter(category="breakfast", public=True)
+            if (option.get('option') == "lunch" ):
+                recipeList = Recipe.objects.filter(category="lunch", public=True)
+            if (option.get('option') == "dinner"):
+                recipeList = Recipe.objects.filter(category="dinner", public=True)
+            print(recipeList)
+            context = {'recipeList': recipeList, "form":categoryForm(), 'user':user}
+        return render(request, "feed.html", context)
+
+
+    # latestRecipeList = Recipe.objects.order_by("-publishedDate")
+    # print(latestRecipeList)
+    # context = {'latestRecipeList':latestRecipeList}
+    return render(request, "feed.html", context)

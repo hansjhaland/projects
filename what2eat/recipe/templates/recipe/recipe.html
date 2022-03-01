@@ -4,32 +4,6 @@
 <p>Her er oppskriftene</p>
 {% endblock %}
 
-{% block sidenav %} <!-- button linking to ex. new recipe -->
-<h2>Filter by categories</h2>
-<!-- 
-<form method = "post" id="categoriesForm">
-<input type="checkbox" id="breakfastCheckBox" name="Breakfast" value="Breaksfast" >
-<label for = "breakfastCheckBox" > Breakfast </label>
-<br> </br>
-<input type="checkbox" id="lunchCheckBox" name="Lunch" value="Lunch" >
-<label for = "lunchCheckBox" > Lunch </label>
-<br> </br>
-<input type="checkbox" id="dinnerCheckbox" name="Dinner" value = "Dinner" >
-<label for = "dinnerCheckbox" > Dinner </label>
-<br> </br>
-<input type="submit" id="filterButton"  name="filterButton" method="POST" value="Filter"></input>
-</form>
--->
-<form action="" method="post">
-    <!-- csrf_token = Cross site request Forgery protection -->
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Filter">
-</form>
-
-
-
-    {%endblock%}
 {% block content %}
 
  {%if recipeList %}
@@ -40,17 +14,3 @@
     <p>Ingen oppskrifter å vise</p>
 {% endif %}
 {%endblock%}
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>hei på deg</h1>
-    
-</body>
-</html> -->

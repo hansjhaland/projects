@@ -1,0 +1,16 @@
+.recipeItem {
+    border: 2px aquamarine solid;
+    padding: 14px 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.recipeItem:hover {
+    background-color: aquamarine;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    
+}

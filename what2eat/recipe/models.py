@@ -1,7 +1,12 @@
+from tkinter import HIDDEN, Widget
 from turtle import title
+from unicodedata import category
 from django.db import models
+from django import forms
 from django.forms import ModelForm
 from user.models import User
+
+CHOICES = [("breakfast", "Frokost"),("lunch", "Lunsj"), ("dinner", "Middag")]
 
 # Create your models here.
 class Recipe(models.Model):
@@ -9,21 +14,26 @@ class Recipe(models.Model):
     publishedDate = models.DateTimeField("date published", auto_now_add=True)
     ingredients = models.CharField(max_length=300)
     description = models.CharField(max_length=1000)
+    public = models.BooleanField(default=False) # if true, the recipe should show up in the public feed
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    breakfast, lunch, dinner = "Breakfast", "Lunch", "Dinner"
-    categoryChoices = [(breakfast, 'Breakfast'), (lunch, 'Lunch'),(dinner, 'Dinner')]
-    category = models.CharField(max_length=10,choices = categoryChoices, default=dinner)
+    category = models.CharField(max_length=10,choices = CHOICES)
 
     def __str__(self):
-        return self.title
+        return self.title + self.category
 
 
 class RecipeForm(ModelForm):
     class Meta:
         model = Recipe
         fields = "__all__"
-       # exclude = ["publishedDate"]
+        #exclude = ["user"]
+        widgets = {
+             "user": forms.HiddenInput()
+        }
         #fields = ["title", "publishedDate", "ingredients", "description"]
 
+class categoryForm(forms.Form):
+    CHOICES.insert(0,("all", "Alle"))
+    option = forms.ChoiceField(choices=CHOICES, label="", widget=forms.RadioSelect)
 
 

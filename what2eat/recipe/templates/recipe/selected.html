@@ -10,8 +10,12 @@
 <p>Description: {{recipe.description}}</p>
 <p>Category: {{recipe.category}}</p>
 <p>User: {{recipe.user}}</p>
-<form action="#" method="post"> 
+{%if recipe.user.id == user.id%}
+<!-- <form action="/{{user.id}}/" method="post">  -->
+<form action="" method="post"> 
     {% csrf_token %}
     <input type="submit", name="delete", value="delete">
 </form>
+<a href="/{{user.id}}/recipe/{{recipe.id}}/edit/"><button> Edit </button></a>
+{%endif%}
 {%endblock%}

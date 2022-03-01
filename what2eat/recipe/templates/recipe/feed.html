@@ -1,0 +1,39 @@
+{% extends "user/base.html"%}
+{% load static %}
+
+{% block header_info %} <!-- for linking other stylesheets etc --> 
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
+{%endblock%}
+
+{% block sidenav_title %}
+    <p>Filtrer etter kategorier</p>
+{%endblock%}
+
+{% block sidenav %} <!-- button linking to ex. new recipe -->
+<form action="" method="post">
+    <!-- csrf_token = Cross site request Forgery protection -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Filtrer">
+</form>
+{%endblock%}
+
+
+{% block page_title%}
+<p>Feed for alle offetilige oppskrifter</p>
+{% endblock %}
+
+{% block content %}
+ {%if recipeList %}
+    {% for recipe in recipeList %}
+    <a href="/{{user.id}}/recipe/{{recipe.id}}">
+    <div class="recipeItem">
+        <h3>{{recipe.title}}</h3>
+        <p>Publisert: {{recipe.publishedDate}}</p> 
+        <p>Forfatter: {{recipe.user}} </p>
+    </div></a>
+    {% endfor %}
+{% else %}
+    <p>Ingen oppskrifter å vise</p>
+{% endif %}
+{%endblock%}
