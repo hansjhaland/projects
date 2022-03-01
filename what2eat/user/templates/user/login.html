@@ -1,0 +1,20 @@
+{% extends "user/base2.html" %}
+
+{% block page_title %}
+<h2>Logg inn</h2>
+{%endblock%}
+
+
+{% block content %}
+<div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit", value="Logg inn">
+    </form>
+    <form action="/register/" method="post"> 
+        {% csrf_token %}
+        <input type="submit", value="Registrer ny bruker">
+    </form>
+  </div>
+{%endblock%}

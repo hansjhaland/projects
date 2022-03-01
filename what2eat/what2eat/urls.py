@@ -20,13 +20,14 @@ from user import views as userv
 
 
 urlpatterns = [
-    path('', userv.index, name="index"),
+    path('', userv.login, name="login"),
     path('admin/', admin.site.urls),
     path('', include("recipe.urls")),
-    path('register/', userv.signup, name="signup"),
-    # path('user/', userv.user, name="user"),
+    path('register/', userv.register, name="signup"),
+    path('user/', userv.user, name="user"),
     path('recipe/', recv.show_all_recipes, name = "recipeshow" ),
     path("recipe/form/", recv.create_recipe, name ="create_recipe"),
     path('hello/', userv.hello, name = "hello"),
-    path('user/<int:id>', userv.user, name="user")
+    path('user/<int:id>', userv.user, name="user"),
+    # path('login/', userv.login, name = "login")
 ]
