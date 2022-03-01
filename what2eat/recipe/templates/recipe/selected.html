@@ -6,8 +6,10 @@
 
 {% block content%}
 <p>{{recipe.publishedDate}}</p>
-<p>{{recipe.ingredients}}</p>
-<p>{{recipe.description}}</p>
+<p>Ingredients: {{recipe.ingredients}}</p>
+<p>Description: {{recipe.description}}</p>
+<p>Category: {{recipe.category}}</p>
+<p>User: {{recipe.user}}</p>
 <form action="#" method="post"> 
     {% csrf_token %}
     <input type="submit", name="delete", value="delete">
