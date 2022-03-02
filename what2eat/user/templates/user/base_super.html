@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>What2Eat</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static '/user/base_super.css' %}">
+{% block header_info_base %}
+{%endblock%}
+{% block header_info %}
+{%endblock%}
+</head>
+<body>
+
+<div class="topnav">
+    <p>What<span id="w2e">2</span>Eat</p>
+    <a href="/">Logg ut</a>
+    <a href="/{{user.id}}">Min profil</a>
+    <a href="/{{user.id}}/feed/">Hjem</a>
+    <a href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+</div>
+
+<div class="row"> 
+    {% block page_layout %}
+    {%endblock%}
+</div>
+
+</body>
+</html>

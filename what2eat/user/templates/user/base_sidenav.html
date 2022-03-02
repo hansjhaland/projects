@@ -1,0 +1,29 @@
+{% extends "user/base_super.html" %}
+{% load static %}
+
+{% block header_info_base %} 
+    <link rel="stylesheet" type="text/css" href="{% static '/user/sidenav.css' %}">
+{%endblock%}
+
+{% block page_layout %}
+<div class="sidenav">
+    <div class="header">
+        {% block sidenav_title %} <!-- Options from site, ex "My Site options" --> 
+      {%endblock%}
+    </div>
+    {% block sidenav %} <!-- button linking to ex. new recipe -->
+    {%endblock%}
+
+  </div>
+  
+  <div class="main">
+    <div class="header">
+        {% block page_title %} <!-- Title of page, ex. "My site"-->
+        {%endblock%}
+    </div>
+    <div>
+        {% block content %}  <!-- Pgae content, ex. "My recipies"-->
+        {%endblock%}
+    </div>
+  </div>
+{%endblock%}

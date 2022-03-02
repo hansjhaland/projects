@@ -56,13 +56,7 @@
     border-radius: 1px;
   }
 
-  .column2 {
-    float: left;
-    width: 80%;
-    height: 100%;
-    padding: 15px;
-    /* border-left: #333 1px solid; */
-  }
+
   .catagory{
       background-color: #fff1ee;
       border-radius: 5px;

@@ -1,0 +1,15 @@
+.sidenav {
+    float: left;
+    width: 20%;
+    height: 100%;
+    padding: 15px;
+    /* background-color: #fff1ee; */
+  }
+
+  .main {
+    float: left;
+    width: 80%;
+    height: 100%;
+    padding: 15px;
+    /* border-left: #333 1px solid; */
+  }

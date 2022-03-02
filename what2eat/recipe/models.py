@@ -37,3 +37,4 @@ class categoryForm(forms.Form):
     option = forms.ChoiceField(choices=CHOICES, label="", widget=forms.RadioSelect)
 
 
+

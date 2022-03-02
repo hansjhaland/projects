@@ -1,16 +1,13 @@
-{% extends "user/base.html" %}
+{% extends "user/base_wide.html" %}
+{% load static %}
 
-{% block sidenav %}
-    <h6><a href="recipe/form">Opprett en oppskrift</a></h6>
-    <h6><a href="feed">vis felles feed</a></h6>
+{% block header_info %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
 {%endblock%}
+
 
 {% block page_title %}
 <h2>{{user.fname}} sin side</h2>
-{%endblock%}
-
-{% block sidenav_title %}
-    <h3>Mine valg</h3>
 {%endblock%}
 
 
@@ -18,7 +15,13 @@
 <h3>Mine oppskrifter:</h3>
     {%if recipeList %}
         {% for recipe in recipeList %}
-            <p><a href="recipe/{{recipe.id}}">{{recipe.title}}</a> {{recipe.publishedDate}}</p>
+        <a href="recipe/{{recipe.id}}">
+        <div class="recipeItem">
+            <p>Hei</p>
+            <h3>{{recipe.title}}</h3>
+            <p>Publisert: {{recipe.publishedDate}}</p> 
+            <p>Forfatter: {{recipe.user}} </p>
+        </div></a>
         {% endfor %}
     {% else %}
         <p>Ingen oppskrifter å vise</p>

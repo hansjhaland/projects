@@ -1,0 +1,20 @@
+{% extends "user/base_super.html" %}
+{% load static %}
+
+{% block header_info_base %} 
+    <link rel="stylesheet" type="text/css" href="{% static '/user/base_wide.css' %}">
+{%endblock%}
+
+
+{% block page_layout %}
+  <div class="mainWide">
+    <div class="header">
+        {% block page_title %} <!-- Title of page, ex. "My site"-->
+        {%endblock%}
+    </div>
+    <div>
+        {% block content %}  <!-- Pgae content, ex. "My recipies"-->
+        {%endblock%}
+    </div>
+  </div>
+{%endblock%}
