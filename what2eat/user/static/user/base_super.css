@@ -6,12 +6,15 @@
     margin: 0;
     background-color: #F7F7F7;
     font-family: Arial, Helvetica, sans-serif;
+    color: #202020;
   }
-  .darkmode{
-    background-color: #202020;
+  .top-container {
+    padding: 30px;
+    text-align: center;
   }
-  .lightmode{
-    background-color: #f7f7f7;
+  #intropicture{
+    width: 100%;
+    height: 50px;
   }
   #w2e {
       color: #ee7f3e;
@@ -19,21 +22,22 @@
   .topnav {
     overflow: hidden;
     background-color: #202020;
-    background-image: linear-gradient(to right, #363636 , #626262);
+    /*background-image: linear-gradient(to right, #363636 , #626262);*/
   }
-  
+
   .topnav p {
       font-family: baloo;
-      color: #ddd;
       float: left;
       margin-left: 10px;
       text-align: center;
+      color:#ccc;
   }
   
   .topnav a {
     float: left;
     display: block;
-    color: #f2f2f2;
+    color: #ddd;
+
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -45,8 +49,25 @@
     height: 100%;
     color: black;
   }
+  #lightmode{
+    background-color: #202020;
+    background-image: linear-gradient(to right, #363636 , #626262);
+  }
+  #darkmode{
+    background-color: #afafaf;
+    background-image: linear-gradient(to right, #c3c3c3 , #ffffff);
+  }
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .sticky + .row {
+    padding-top: 102px;
+  }
   .row {
       min-height: 200px;
+      padding: 16px;
   }
   /* Clear floats after the columns */
   .row:after {
@@ -56,6 +77,8 @@
   }
   .header {
     background-color: #ffa291;
+    color:#202020;
+    font-weight: bold;
     padding: 10px;
     text-align: center;
     border-radius: 1px;
