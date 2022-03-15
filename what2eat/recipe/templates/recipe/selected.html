@@ -12,6 +12,10 @@
 <p>User: {{recipe.user}}</p>
 {%if recipe.user.id == user.id%}
 <!-- <form action="/{{user.id}}/" method="post">  -->
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+</form>
 <form action="" method="post"> 
     {% csrf_token %}
     <input type="submit", name="delete", value="delete">
