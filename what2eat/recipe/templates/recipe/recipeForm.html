@@ -1,9 +1,19 @@
+<head>
+    <style>
+        .newrecipe {
+            background-color: #f7f7f7;
+            color: #232121;
+        }       
+    </style>
+</head>
+
 {% extends "user/base_wide.html"%}
 
 {%block page_title %}
 <h1>Her kan {{user}} skrive inn en oppskrift</h1>
 {%endblock%}
 
+{% block folder_name %}ny oppskrift{%endblock%}
 
 {% block content%}
 <form action="" method="post">
@@ -14,4 +24,24 @@
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
+
+
+{%block script%}
+<script>
+    var colorListener = document.querySelector("#colorListener");
+    var newrecipe = document.querySelector(".newrecipe");
+    colorListener.addEventListener("click", changeModeMysite);
+
+    function changeModeMysite(){
+        if (newrecipe.getAttribute("id")=="light"){
+            newrecipe.removeAttribute("id", "light");
+            newrecipe.setAttribute("id", "dark");
+         }
+        else {
+            newrecipe.removeAttribute("id", "dark");
+            newrecipe.setAttribute("id", "light");
+        }
+    }
+</script>
+{%endblock%}
 

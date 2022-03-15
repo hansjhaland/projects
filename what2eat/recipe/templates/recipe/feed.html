@@ -1,5 +1,16 @@
+<head>
+    <style>
+        .home {
+            background-color: #f7f7f7;
+            color: #232121;
+        }
+    </style>
+</head>
+
 {% extends "user/base_sidenav.html"%}
 {% load static %}
+
+{% block folder_name %}hjem{%endblock%}
 
 {% block header_info %} <!-- for linking other stylesheets etc --> 
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
@@ -37,4 +48,25 @@ Feed for alle offetilige oppskrifter
 {% else %}
     <p>Ingen oppskrifter å vise</p>
 {% endif %}
+{%endblock%}
+
+
+
+{%block script%}
+<script>
+    var colorListener = document.querySelector("#colorListener");
+    var home = document.querySelector(".home");
+    colorListener.addEventListener("click", changeModeMysite);
+
+    function changeModeMysite(){
+        if (home.getAttribute("id")=="light"){
+            home.removeAttribute("id", "light");
+            home.setAttribute("id", "dark");
+         }
+        else {
+            home.removeAttribute("id", "dark");
+            home.setAttribute("id", "light");
+        }
+    }
+</script>
 {%endblock%}

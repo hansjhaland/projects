@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .mysite {
+            background-color: #f7f7f7;
+            color: #232121;
+        }
+        
+    </style>
+</head>
+
 {% extends "user/base_wide.html" %}
 {% load static %}
+
+{% block folder_name %}min side{%endblock%}
 
 {% block header_info %}
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
@@ -26,3 +39,23 @@
         <p>Ingen oppskrifter å vise</p>
     {% endif %}
 {%endblock%}
+
+{%block script%}
+<script>
+    var colorListener = document.querySelector("#colorListener");
+    var mysite = document.querySelector(".mysite");
+    colorListener.addEventListener("click", changeModeMysite);
+
+    function changeModeMysite(){
+        if (mysite.getAttribute("id")=="light"){
+            mysite.removeAttribute("id", "light");
+            mysite.setAttribute("id", "dark");
+         }
+        else {
+            mysite.removeAttribute("id", "dark");
+            mysite.setAttribute("id", "light");
+        }
+    }
+</script>
+{%endblock%}
+

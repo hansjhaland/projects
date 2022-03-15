@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>What2Eat</title>
+<title>{%block folder_name %}{%endblock%}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{% static '/user/base_super.css' %}">
@@ -14,14 +14,14 @@
 <body>
 <div class="container">
     <div class="top-container">
-        <img src="https://pizzapalaceburwell.com/wp-content/uploads/2021/11/Food.jpg" alt="" id="intropicture">
+       <h1>What<span id="w2e">2</span>Eat</h1>
     </div>
     <div class="topnav">
         <p>What<span id="w2e">2</span>Eat</p>
         <a href="/">Logg ut</a>
-        <a href="/{{user.id}}">Min profil</a>
-        <a href="/{{user.id}}/feed/">Hjem</a>
-        <a href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+        <a class="mysite" id="light" href="/{{user.id}}">Min profil</a>
+        <a class="home" id="light" href="/{{user.id}}/feed/">Hjem</a>
+        <a class="newrecipe" id="light"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
     </div>
 
     <div class="row"> 
@@ -34,25 +34,26 @@
     var body = document.querySelector("body");
     var topnav = document.querySelector(".topnav");
     var colorListener = document.querySelector("#colorListener");
-
+    var mysite = document.querySelector("#mysite");
+    var home = document.querySelector("#home");
+    var newrecipe = document.querySelector("#newrecipe");
 
     colorListener.addEventListener("click", changeMode);
 
     function changeMode(){
         if (colorListener.innerHTML=="Dark mode"){
             colorListener.innerHTML="Light mode";
-            body.style.backgroundColor="#323232";
+            body.style.backgroundColor="#232121";
             body.style.color="#f7f7f7";
             topnav.removeAttribute("id", "lightmode");
-            topnav.setAttribute("id", "darkmode");
-            
+            topnav.setAttribute("id", "darkmode");  
         }
         else{
             colorListener.innerHTML="Dark mode";
             body.style.backgroundColor="#f7f7f7";
-            body.style.color="#202020";   
+            body.style.color="#232121";   
             topnav.removeAttribute("id", "darkmode");
-            topnav.setAttribute("id", "lightmode");
+            topnav.setAttribute("id", "lightmode");  
         }
     }
 
@@ -72,6 +73,8 @@
     }
 
 </script>
+
+{%block script%}{%endblock%}
 
 </body>
 </html>
