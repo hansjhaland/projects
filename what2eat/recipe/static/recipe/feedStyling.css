@@ -9,6 +9,29 @@
     background-color: aquamarine;
 }
 
+img {
+    max-height:100%; 
+    max-width:100%;
+}
+
+.image {
+    width: 20%;
+    float: left;
+    /* border:  2px red solid; */
+}
+
+.info {
+    float: left;
+    margin-left: 5%;
+    width: 75%;
+    /* border:  2px red solid; */
+} 
+
+.hashtag {
+    color: darkgray;
+    font-style: italic;
+}
+
 a {
     color: black;
     text-decoration: none;

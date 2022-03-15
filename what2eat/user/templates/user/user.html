@@ -15,12 +15,19 @@
 <h3>Mine oppskrifter:</h3>
     {%if recipeList %}
         {% for recipe in recipeList %}
-        <a href="recipe/{{recipe.id}}">
-        <div class="recipeItem">
-            <h3>{{recipe.title}}</h3>
-            <p>Publisert: {{recipe.publishedDate}}</p> 
-            <p>Forfatter: {{recipe.user}} </p>
-        </div></a>
+        <a href="/{{user.id}}/recipe/{{recipe.id}}">
+            <div class="recipeItem row">
+                <div class="image">
+                    <img src="{{ recipe.picture.url }}" />
+                </div>
+                <div class="info">
+                    <h3>{{recipe.title}}</h3>
+                    <p class="hashtag">#{{recipe.category}} </p>
+                    <p>{{recipe.description}}</p>
+                    <!-- <img src = "{% static 'recipe/defaultRecipeImage.jpg' %}" /> -->
+                    <p>Forfatter: {{recipe.user}} | Publisert: {{recipe.publishedDate}}</p> 
+                </div>
+            </div></a>
         {% endfor %}
     {% else %}
         <p>Ingen oppskrifter å vise</p>

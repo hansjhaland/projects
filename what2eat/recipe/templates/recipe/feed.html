@@ -1,6 +1,7 @@
 {% extends "user/base_sidenav.html"%}
 {% load static %}
 
+
 {% block header_info %} <!-- for linking other stylesheets etc --> 
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'user/sidenav.css' %}"> -->
@@ -28,10 +29,17 @@
  {%if recipeList %}
     {% for recipe in recipeList %}
     <a href="/{{user.id}}/recipe/{{recipe.id}}">
-    <div class="recipeItem">
-        <h3>{{recipe.title}}</h3>
-        <p>Publisert: {{recipe.publishedDate}}</p> 
-        <p>Forfatter: {{recipe.user}} </p>
+    <div class="recipeItem row">
+        <div class="image">
+            <img src="{{ recipe.picture.url }}" />
+        </div>
+        <div class="info">
+            <h3>{{recipe.title}}</h3>
+            <p class="hashtag">#{{recipe.category}} </p>
+            <p>{{recipe.description}}</p>
+            <!-- <img src = "{% static 'recipe/defaultRecipeImage.jpg' %}" /> -->
+            <p>Forfatter: {{recipe.user}} | Publisert: {{recipe.publishedDate}}</p> 
+        </div>
     </div></a>
     {% endfor %}
 {% else %}

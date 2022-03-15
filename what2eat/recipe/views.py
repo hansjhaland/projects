@@ -40,7 +40,7 @@ def create_recipe(request, userID):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST,  request.FILES)
         #print(form.data["user"])
 
         # check whether it's valid:
