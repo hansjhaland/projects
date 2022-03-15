@@ -7,7 +7,12 @@
     background-color: #F7F7F7;
     font-family: Arial, Helvetica, sans-serif;
   }
-  
+  .darkmode{
+    background-color: #202020;
+  }
+  .lightmode{
+    background-color: #f7f7f7;
+  }
   #w2e {
       color: #ee7f3e;
   }

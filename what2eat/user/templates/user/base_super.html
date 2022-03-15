@@ -24,7 +24,30 @@
 <div class="row"> 
     {% block page_layout %}
     {%endblock%}
+    <button id="colorListener">Dark mode</button>
 </div>
+
+<script>
+    var row = document.querySelector(".row");
+    var colorListener = document.querySelector("#colorListener");
+
+    colorListener.addEventListener("click", changeMode);
+
+    function changeMode(){
+        if (colorListener.innerHTML=="Dark mode"){
+            colorListener.innerHTML="Light mode";
+            row.removeAttribute("class", "lightmode");
+            row.setAttribute("class", "darkmode");
+            
+        }
+        else{
+            colorListener.innerHTML="Dark mode";
+            row.removeAttribute("class", "darkmode");
+            row.setAttribute("class", "lightmide");
+        }
+    }
+
+</script>
 
 </body>
 </html>
