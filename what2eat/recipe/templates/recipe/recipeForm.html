@@ -10,8 +10,11 @@
     <!-- csrf_token = Cross site request Forgery protection -->
     {% csrf_token %}
     {{ form.as_p}} 
+    
     <input type='hidden' name="user" value="{{user.id}}" />
     <input type="submit" value="Submit">
 </form>
+
+
 {% endblock %}
 

@@ -82,11 +82,13 @@ def editRecipe(request, id, userID):
     description = recipe.description
     public = recipe.public
     category = recipe.category
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'user':user})
+    picture = recipe.picture
+    print(picture)
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user})
 
     
     if (request.method == "POST"):
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             # publishedDate will not be updated here (maybe not let anyone change it later)
             recipe = Recipe.objects.get(id=id)
@@ -95,6 +97,7 @@ def editRecipe(request, id, userID):
             recipe.title = form.cleaned_data['title']
             recipe.public = form.cleaned_data['public']
             recipe.category = form.cleaned_data["category"]
+            recipe.picture = form.cleaned_data["picture"]
             print(recipe.public)
             recipe.save()
             print(recipe.description)
