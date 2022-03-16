@@ -31,6 +31,24 @@ class LoginForm(ModelForm):
             'password': forms.PasswordInput() 
         }
 
+class ColorMode(models.Model):
+    name = models.CharField(max_length=200)
+    active = models.BooleanField(default=False)
+
+    def getActive(self):
+        return self.active
+
+    def setActive(self, value):
+        self.active = value
+
+    def __str__(self):
+        return "colorMode: " + str(self.active)
+
+class ColorModeForm(ModelForm):
+    class Meta:
+        model = ColorMode
+        fields = ["active"]
+
 """
 class User(models.Model):
 

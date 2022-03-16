@@ -46,6 +46,10 @@
     var mysite = document.querySelector(".mysite");
     colorListener.addEventListener("click", changeModeMysite);
 
+    if(activeColorMode == "True"){
+        changeModeMysite();
+    }
+
     function changeModeMysite(){
         if (mysite.getAttribute("id")=="light"){
             mysite.removeAttribute("id", "light");

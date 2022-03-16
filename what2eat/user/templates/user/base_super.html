@@ -28,15 +28,24 @@
         {% block page_layout %}
         {%endblock%}
         <button id="colorListener">Dark mode</button>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit", value="Dark mode">
+          </form>
     </div>
 </div>
 <script>
     var body = document.querySelector("body");
     var topnav = document.querySelector(".topnav");
     var colorListener = document.querySelector("#colorListener");
-    var mysite = document.querySelector("#mysite");
-    var home = document.querySelector("#home");
-    var newrecipe = document.querySelector("#newrecipe");
+
+    var activeColorMode = '{{ colorMode }}';
+    console.log("denne er " + activeColorMode);
+
+    if(activeColorMode == "True"){
+        changeMode();
+    }
 
     colorListener.addEventListener("click", changeMode);
 
@@ -47,6 +56,8 @@
             body.style.color="#f7f7f7";
             topnav.removeAttribute("id", "lightmode");
             topnav.setAttribute("id", "darkmode");  
+
+
         }
         else{
             colorListener.innerHTML="Dark mode";
@@ -54,6 +65,7 @@
             body.style.color="#232121";   
             topnav.removeAttribute("id", "darkmode");
             topnav.setAttribute("id", "lightmode");  
+
         }
     }
 

@@ -3,12 +3,14 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate # going to be used later
 from django.contrib.auth.forms import UserCreationForm
-from user.models import User
+from user.models import User, ColorMode
 from user.models import UserForm
 # from user.models import Login
 from user.models import LoginForm
 from recipe.models import Recipe
 from django.core.exceptions import ValidationError
+
+from what2eat.user.models import ColorModeForm
 
 # Create your views here.
 
@@ -36,10 +38,21 @@ def register(request):
 # def user(response, id):
 #     person = User.objects.get(id=id)
 #     return render(response, "user/user.html", {"name":(person.fname + ' ' + person.lname)})
-def user(response, id):
+def user(request, id):
     user = User.objects.get(id=id)
     recipeList = Recipe.objects.filter(user=id)
-    return render(response, "user/user.html", {"user":user, "recipeList":recipeList})
+
+    colorMode = ColorMode.objects.get(id=1)
+    activeValue = colorMode.getActive()
+    changeColor(request)
+    return render(request, "user/user.html", {"user":user, "recipeList":recipeList, "colorMode":activeValue })
+
+def changeColor(request):
+    if( request.method == "POST"):
+        form = ColorModeForm(request.POST)
+        if form.is_valid():
+            colorMode = ColorMode.objects.get(id=1)
+            form.save()
 
 def login(request):
     print("hellooo folkens")
@@ -66,6 +79,8 @@ def login(request):
 def listAllUsers(response):
     userList = User.objects.all()
     return render(response, "listOverUsers.html", {"userList":userList})
+
+
 
 
     
