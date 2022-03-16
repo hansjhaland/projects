@@ -27,13 +27,16 @@
 
 
 {%block script%}
+
 <script>
-    var colorListener = document.querySelector("#colorListener");
     var newrecipe = document.querySelector(".newrecipe");
-    colorListener.addEventListener("click", changeModeMysite);
+
+    if(activeColorMode == "True"){
+        changeModeMysite();
+    }
 
     function changeModeMysite(){
-        if (newrecipe.getAttribute("id")=="light"){
+        if (activeColorMode == "True"){
             newrecipe.removeAttribute("id", "light");
             newrecipe.setAttribute("id", "dark");
          }

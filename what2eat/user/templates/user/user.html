@@ -42,16 +42,16 @@
 
 {%block script%}
 <script>
-    var colorListener = document.querySelector("#colorListener");
+    //var colorListener = document.querySelector("#colorListener");
     var mysite = document.querySelector(".mysite");
-    colorListener.addEventListener("click", changeModeMysite);
+    //colorListener.addEventListener("click", changeModeMysite);
 
     if(activeColorMode == "True"){
         changeModeMysite();
     }
 
     function changeModeMysite(){
-        if (mysite.getAttribute("id")=="light"){
+        if (activeColorMode == "True"){
             mysite.removeAttribute("id", "light");
             mysite.setAttribute("id", "dark");
          }

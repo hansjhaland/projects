@@ -27,18 +27,11 @@
     <div class="row"> 
         {% block page_layout %}
         {%endblock%}
-        <button id="colorListener">Dark mode</button>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit", value="Dark mode">
-          </form>
     </div>
 </div>
 <script>
     var body = document.querySelector("body");
     var topnav = document.querySelector(".topnav");
-    var colorListener = document.querySelector("#colorListener");
 
     var activeColorMode = '{{ colorMode }}';
     console.log("denne er " + activeColorMode);
@@ -47,11 +40,8 @@
         changeMode();
     }
 
-    colorListener.addEventListener("click", changeMode);
-
     function changeMode(){
-        if (colorListener.innerHTML=="Dark mode"){
-            colorListener.innerHTML="Light mode";
+        if (activeColorMode == "True"){
             body.style.backgroundColor="#232121";
             body.style.color="#f7f7f7";
             topnav.removeAttribute("id", "lightmode");
@@ -60,7 +50,6 @@
 
         }
         else{
-            colorListener.innerHTML="Dark mode";
             body.style.backgroundColor="#f7f7f7";
             body.style.color="#232121";   
             topnav.removeAttribute("id", "darkmode");

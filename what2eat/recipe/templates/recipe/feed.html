@@ -53,13 +53,16 @@ Feed for alle offetilige oppskrifter
 
 
 {%block script%}
+
 <script>
-    var colorListener = document.querySelector("#colorListener");
     var home = document.querySelector(".home");
-    colorListener.addEventListener("click", changeModeMysite);
+
+    if(activeColorMode == "True"){
+        changeModeMysite();
+    }
 
     function changeModeMysite(){
-        if (home.getAttribute("id")=="light"){
+        if (activeColorMode == "True"){
             home.removeAttribute("id", "light");
             home.setAttribute("id", "dark");
          }
