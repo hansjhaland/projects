@@ -9,7 +9,7 @@
     </style>
 </head>
 
-{% extends "user/base_wide.html" %}
+{% extends "user/base_sidenav.html"%}
 {% load static %}
 
 {% block folder_name %}min side{%endblock%}
@@ -23,6 +23,17 @@
  {{user.fname}} sin side
 {%endblock%}
 
+{% block sidenav_title %}
+ Mine valg
+{%endblock%}
+
+{% block sidenav %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p}} 
+        <input type="submit" value="Submit">
+    </form>
+{%endblock%}
 
 {% block content %}
 <h3>Mine oppskrifter:</h3>
@@ -42,9 +53,7 @@
 
 {%block script%}
 <script>
-    //var colorListener = document.querySelector("#colorListener");
     var mysite = document.querySelector(".mysite");
-    //colorListener.addEventListener("click", changeModeMysite);
 
     if(activeColorMode == "True"){
         changeModeMysite();

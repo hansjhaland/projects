@@ -3,12 +3,13 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate # going to be used later
 from django.contrib.auth.forms import UserCreationForm
-from user.models import User 
+from user.models import User, modeForm
 from user.models import UserForm
 # from user.models import Login
 from user.models import LoginForm
 from recipe.models import Recipe
 from django.core.exceptions import ValidationError
+
 
 # Create your views here.
 
@@ -39,8 +40,9 @@ def register(request):
 def user(request, id):
     user = User.objects.get(id=id)
     recipeList = Recipe.objects.filter(user=id)
-
     colorMode = user.darkmode
+    form = modeForm({'darkmode': colorMode})
+    
     return render(request, "user/user.html", {"user":user, "recipeList":recipeList, "colorMode":colorMode })
 
 def login(request):

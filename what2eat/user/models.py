@@ -32,6 +32,12 @@ class LoginForm(ModelForm):
             'password': forms.PasswordInput() 
         }
 
+class modeForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['darkmode']
+
+
 class ColorMode(models.Model):
     name = models.CharField(max_length=200)
     active = models.BooleanField(default=False)
