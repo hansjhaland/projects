@@ -86,21 +86,22 @@ def editRecipe(request, id, userID):
     print(picture)
     form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user})
 
-    
+    if(str(recipe.picture) != "/images/defaultRecipeImage.jpg"):
+            recipe.picture.delete(False)
+
     if (request.method == "POST"):
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             # publishedDate will not be updated here (maybe not let anyone change it later)
-            recipe = Recipe.objects.get(id=id)
-            recipe.ingredients = form.cleaned_data["ingredients"]
-            recipe.description = form.cleaned_data["description"]
-            recipe.title = form.cleaned_data['title']
-            recipe.public = form.cleaned_data['public']
-            recipe.category = form.cleaned_data["category"]
-            recipe.picture = form.cleaned_data["picture"]
-            print(recipe.public)
-            recipe.save()
-            print(recipe.description)
+            newRecipe = Recipe.objects.get(id=id)
+            newRecipe.ingredients = form.cleaned_data["ingredients"]
+            newRecipe.description = form.cleaned_data["description"]
+            newRecipe.title = form.cleaned_data['title']
+            newRecipe.public = form.cleaned_data['public']
+            newRecipe.category = form.cleaned_data["category"]
+            newRecipe.picture = form.cleaned_data["picture"]
+
+            newRecipe.save()
 
     return render(request, 'recipeForm.html', {'form':form, 'user':user})
 
