@@ -39,14 +39,19 @@
     padding: 14px 16px;
     text-decoration: none;
     float: right;
-    /*color:#e9e5e5;*/
+
   }
   
    /*menu light*/
-  .topnav a:hover {
+  .lightA:hover {
     background-color: #f7f7f7;  
     color: #232121;
   }
+  .light {
+    background-color: #f7f7f7;
+    color: #232121;
+  }
+
   #lightmode{
     background-color: #232121;
     background-image: linear-gradient(to right, #232121 , #919090);
@@ -59,7 +64,14 @@
     background-image: linear-gradient(to right, #a3a2a3 , #ffffff);
     color: #232121;
   }
-  
+  .darkA:hover {
+    background-color: #232121;  
+    color: #f7f7f7;
+  } 
+  .dark {
+    background-color: #232121;
+    color: #e9e5e5;
+  }
 
   /*menu sticky funsction*/
   .sticky {
@@ -159,7 +171,3 @@
     background-color: #f88f7c;
   }
 
-  #dark {
-    background-color: #232121;
-    color: #e9e5e5;
-}

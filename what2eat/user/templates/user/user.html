@@ -20,7 +20,7 @@
 
 
 {% block page_title %}
- {{user.fname}} sin side
+ <h2>{{user.fname}} sin side</h2>
 {%endblock%}
 
 {% block sidenav_title %}
@@ -53,20 +53,19 @@
 
 {%block script%}
 <script>
-    var mysite = document.querySelector(".mysite");
+    var mysite = document.querySelector("#mysite");
 
-    if(activeColorMode == "True"){
-        changeModeMysite();
-    }
+    changeModeMysite();
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            mysite.removeAttribute("id", "light");
-            mysite.setAttribute("id", "dark");
+            mysite.removeAttribute("class", "light");
+            mysite.setAttribute("class", "link darkA dark");
+            console.log("hal")
          }
         else {
-            mysite.removeAttribute("id", "dark");
-            mysite.setAttribute("id", "light");
+            mysite.removeAttribute("class", "dark");
+            mysite.setAttribute("class", "link lightA light");
         }
     }
 </script>

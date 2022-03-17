@@ -29,20 +29,18 @@
 {%block script%}
 
 <script>
-    var newrecipe = document.querySelector(".newrecipe");
+    var newrecipe = document.querySelector("#newrecipe");
 
-    if(activeColorMode == "True"){
-        changeModeMysite();
-    }
+    changeModeMysite();
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            newrecipe.removeAttribute("id", "light");
-            newrecipe.setAttribute("id", "dark");
+            newrecipe.removeAttribute("class", "light");
+            newrecipe.setAttribute("class", "link darkA dark");
          }
         else {
-            newrecipe.removeAttribute("id", "dark");
-            newrecipe.setAttribute("id", "light");
+            newrecipe.removeAttribute("class", "dark");
+            newrecipe.setAttribute("class", "link lightA light");
         }
     }
 </script>

@@ -18,10 +18,10 @@
     </div>
     <div class="topnav">
         <p>What<span id="w2e">2</span>Eat</p>
-        <a href="/">Logg ut</a>
-        <a class="mysite" id="light" href="/{{user.id}}">Min profil</a>
-        <a class="home" id="light" href="/{{user.id}}/feed/">Hjem</a>
-        <a class="newrecipe" id="light"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+        <a class="link  lightA"  href="/">Logg ut</a>
+        <a class="link  lightA" id="mysite"  href="/{{user.id}}">Min profil</a>
+        <a class="link   lightA"  id="home" href="/{{user.id}}/feed/">Hjem</a>
+        <a class="link  lightA" id="newrecipe"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
     </div>
 
     <div class="row"> 
@@ -32,9 +32,10 @@
 <script>
     var body = document.querySelector("body");
     var topnav = document.querySelector(".topnav");
+    var linkEl = document.querySelectorAll('.link');
+    console.log(linkEl)
 
     var activeColorMode = '{{ colorMode }}';
-    console.log("denne er " + activeColorMode);
 
     if(activeColorMode == "True"){
         changeMode();
@@ -46,15 +47,21 @@
             body.style.color="#f7f7f7";
             topnav.removeAttribute("id", "lightmode");
             topnav.setAttribute("id", "darkmode");  
-
-
+            for(var i=0; i<4; i++){
+                linkEl[i].removeAttribute("class", "lightA");
+                linkEl[i].setAttribute("class", "link darkA");
+            }
+            
         }
         else{
             body.style.backgroundColor="#f7f7f7";
             body.style.color="#232121";   
-            topnav.removeAttribute("id", "darkmode");
-            topnav.setAttribute("id", "lightmode");  
-
+            topnav.removeAttribute("class", "darkmode");
+            topnav.setAttribute("class", "lightmode");  
+            for(var i=0; i<4; i++){
+                linkEl[i].removeAttribute("class", "darkA");
+                linkEl[i].setAttribute("class", "link lightA");
+            }      
         }
     }
 

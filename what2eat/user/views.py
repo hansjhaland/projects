@@ -42,8 +42,15 @@ def user(request, id):
     recipeList = Recipe.objects.filter(user=id)
     colorMode = user.darkmode
     form = modeForm({'darkmode': colorMode})
-    
-    return render(request, "user/user.html", {"user":user, "recipeList":recipeList, "colorMode":colorMode })
+
+    if (request.method == "POST"):
+        form = modeForm(request.POST)
+        if form.is_valid():
+            user =  User.objects.get(id=id)
+            user.darkmode = form.cleaned_data["darkmode"]
+            user.save()
+            return HttpResponseRedirect('/'+str(user.id)+'/')
+    return render(request, "user/user.html", {"user":user, "recipeList":recipeList, "colorMode":colorMode, "form":form })
 
 def login(request):
     print("hellooo folkens")

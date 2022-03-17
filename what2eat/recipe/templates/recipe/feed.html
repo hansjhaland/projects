@@ -55,7 +55,7 @@ Feed for alle offetilige oppskrifter
 {%block script%}
 
 <script>
-    var home = document.querySelector(".home");
+    var home = document.querySelector("#home");
 
     if(activeColorMode == "True"){
         changeModeMysite();
@@ -63,12 +63,12 @@ Feed for alle offetilige oppskrifter
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            home.removeAttribute("id", "light");
-            home.setAttribute("id", "dark");
+            home.removeAttribute("class", "light");
+            home.setAttribute("class", "link darkA dark");
          }
         else {
-            home.removeAttribute("id", "dark");
-            home.setAttribute("id", "light");
+            home.removeAttribute("class", "dark");
+            home.setAttribute("class", "link lightA light");
         }
     }
 </script>
