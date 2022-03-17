@@ -17,6 +17,7 @@ class Recipe(models.Model):
     public = models.BooleanField(default=False) # if true, the recipe should show up in the public feed
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10,choices = CHOICES)
+    picture = models.ImageField(upload_to ="images", default = "/images/defaultRecipeImage.jpg")
 
     def __str__(self):
         return self.title + self.category

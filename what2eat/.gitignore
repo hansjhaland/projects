@@ -3,3 +3,9 @@
 __pycache__
 
 db.sqlite3
+
+# exclude everything
+recipe/media/images/*
+
+# exception to the rule
+!recipe/media/images/defaultRecipeImage.jpg
