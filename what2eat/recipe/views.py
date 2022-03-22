@@ -1,3 +1,4 @@
+from distutils.dep_util import newer_pairwise
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe, RecipeForm, categoryForm
@@ -82,12 +83,13 @@ def editRecipe(request, id, userID):
     title = recipe.title
     publishedDate = recipe.publishedDate
     ingredients = recipe.ingredients
+    method = recipe.method
     description = recipe.description
     public = recipe.public
     category = recipe.category
     picture = recipe.picture
     print(picture)
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user})
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user, 'method':method})
 
     if(str(recipe.picture) != "/images/defaultRecipeImage.jpg"):
             recipe.picture.delete(False)
@@ -105,6 +107,7 @@ def editRecipe(request, id, userID):
             newRecipe.public = form.cleaned_data['public']
             newRecipe.category = form.cleaned_data["category"]
             newRecipe.picture = form.cleaned_data["picture"]
+            newRecipe.method = form.cleaned_data["method"]
 
             newRecipe.save()
 

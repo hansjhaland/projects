@@ -14,6 +14,7 @@ class Recipe(models.Model):
     publishedDate = models.DateTimeField("date published", auto_now_add=True)
     ingredients = models.CharField(max_length=300)
     description = models.CharField(max_length=1000)
+    method = models.CharField(max_length=10000, default="")
     public = models.BooleanField(default=False) # if true, the recipe should show up in the public feed
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10,choices = CHOICES)
@@ -29,7 +30,8 @@ class RecipeForm(ModelForm):
         fields = "__all__"
         #exclude = ["user"]
         widgets = {
-             "user": forms.HiddenInput()
+             "user": forms.HiddenInput(),
+             "method": forms.Textarea()
         }
         #fields = ["title", "publishedDate", "ingredients", "description"]
 

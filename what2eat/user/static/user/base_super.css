@@ -85,7 +85,7 @@
 
   /*content*/
   .row {
-      min-height: 200px;
+      min-height: 100px;
       padding: 16px;
   }
   .row:after {
