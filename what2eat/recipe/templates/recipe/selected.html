@@ -10,16 +10,21 @@
 <p>Description: {{recipe.description}}</p>
 <p>Category: {{recipe.category}}</p>
 <p>User: {{recipe.user}}</p>
+<p>Gjennomsnittlig rangering: {{recipe.avg_rating|floatformat:2}}</p>
 {%if recipe.user.id == user.id%}
 <!-- <form action="/{{user.id}}/" method="post">  -->
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-</form>
 <form action="" method="post"> 
     {% csrf_token %}
     <input type="submit", name="delete", value="delete">
 </form>
 <a href="/{{user.id}}/recipe/{{recipe.id}}/edit/"><button> Edit </button></a>
+{% else %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="hidden" name="user" value="{{user.id}}">
+    <input type="hidden" name="recipe" value="{{recipe.id}}">
+    <input type="submit", name="rate", value="Lagre rangering">
+</form>
 {%endif%}
 {%endblock%}

@@ -20,6 +20,7 @@ class Recipe(models.Model):
     public = models.BooleanField(default=False) # if true, the recipe should show up in the public feed
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10,choices = CHOICES)
+    avg_rating = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.title + self.category
@@ -29,9 +30,8 @@ class Rating(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=False, default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     
-
-    class Meta:
-        unique_together = (("user", "recipe"),)
+    # class Meta:
+    #     # unique_together = (("user", "recipe"),)
         
         
 class RecipeForm(ModelForm):
@@ -40,7 +40,8 @@ class RecipeForm(ModelForm):
         fields = "__all__"
         #exclude = ["user"]
         widgets = {
-             "user": forms.HiddenInput()
+             "user": forms.HiddenInput(),
+             "avg_rating": forms.HiddenInput()
         }
         #fields = ["title", "publishedDate", "ingredients", "description"]
 
@@ -48,8 +49,17 @@ class categoryForm(forms.Form):
     CHOICES.insert(0,("all", "Alle"))
     option = forms.ChoiceField(choices=CHOICES, label="", widget=forms.RadioSelect)
 
-class RatingForm(forms.Form):
-    option = forms.ChoiceField(choices=RATING, label="", widget=forms.RadioSelect)
+class RatingForm(ModelForm):
+    rating = forms.ChoiceField(choices=RATING, label="rating", widget=forms.RadioSelect)
+    rating_form = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+
+    class Meta:
+        model = Rating
+        fields = "__all__"
+        widgets = {
+             "user": forms.HiddenInput(),
+             "recipe": forms.HiddenInput()
+        }
 
 
 

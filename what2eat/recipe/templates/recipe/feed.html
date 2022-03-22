@@ -32,6 +32,7 @@
         <h3>{{recipe.title}}</h3>
         <p>Publisert: {{recipe.publishedDate}}</p> 
         <p>Forfatter: {{recipe.user}} </p>
+        <p>Rangering: {{recipe.avg_rating|floatformat:2}}</p>
     </div></a>
     {% endfor %}
 {% else %}
