@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Recipe, RecipeForm, categoryForm
+from .models import RatingForm, Recipe, RecipeForm, categoryForm, Rating
 from user.models import User
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -63,15 +64,38 @@ def create_recipe(request, userID):
 
     return render(request, 'recipeForm.html', {'form': form, 'user':user})
 
+
 def show_recipe(request, userID, id):
     recipe = Recipe.objects.get(id=id)
     user = User.objects.get(id=userID)
+    form = RatingForm()
+    rating_entry = Rating.objects.filter(user_id = userID, recipe_id = id)
+    if rating_entry.exists():
+        form = RatingForm({'rating': rating_entry[:1].get().rating, 'rating_form': True, 'user': userID, 'recipe': id})
+    
+    context = {'recipe':recipe, 'form': form, 'user':user}
 
     if request.method == 'POST':
-        recipe.delete()
-        return redirect('/%i' % userID)
+        if "rating_form" in request.POST:
+            form = RatingForm(request.POST)
+            if form.is_valid():
+                rating = Rating.objects.get(user_id=userID, recipe_id=id)
+                rating.rating = form.cleaned_data["rating"]
+                rating.save()
+            else:
+                print(form.errors.as_data())
+            new_avg_rating = Rating.objects.filter(recipe_id = id).aggregate(Avg('rating'))
+            Recipe.objects.filter(id = id).update(avg_rating = new_avg_rating['rating__avg'])
+                
+            context = {'recipe':recipe, 'form': form, 'user':user}
 
-    return render(request, "recipe/selected.html", {"recipe":recipe, "user":user})
+            return render(request, "recipe/selected.html", context)
+        else:    
+            recipe.delete()
+            return redirect('/%i' % userID)
+
+    return render(request, "recipe/selected.html", context)
+
 
 def editRecipe(request, id, userID):
     recipe = Recipe.objects.get(id=id)
@@ -107,6 +131,7 @@ def showFeed(request, userID):
     user = User.objects.get(id=userID)
     #return render(response, "feed.html", context)
     print(recipeList)
+
     context = {'recipeList':recipeList, 'form': categoryForm(), 'user':user}
 
     if request.method == "POST":
