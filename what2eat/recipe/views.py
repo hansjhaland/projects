@@ -71,8 +71,9 @@ def show_recipe(request, userID, id):
     recipe = Recipe.objects.get(id=id)
     user = User.objects.get(id=userID)
     form = RatingForm()
-    rating_entry = Rating.objects.filter(user_id = userID, recipe_id = id)
-    if rating_entry.exists():
+    #rating_entry = Rating.objects.filter(user_id = userID, recipe_id = id)
+    if Rating.objects.filter(user_id = userID, recipe_id = id).exists():
+        rating_entry = Rating.objects.filter(user_id = userID, recipe_id = id)
         form = RatingForm({'rating': rating_entry[:1].get().rating, 'rating_form': True, 'user': userID, 'recipe': id})
     
     colorMode = user.darkmode
@@ -83,9 +84,12 @@ def show_recipe(request, userID, id):
         if "rating_form" in request.POST:
             form = RatingForm(request.POST)
             if form.is_valid():
-                rating = Rating.objects.get(user_id=userID, recipe_id=id)
-                rating.rating = form.cleaned_data["rating"]
-                rating.save()
+                if Rating.objects.filter(user_id = userID, recipe_id = id).exists():
+                    rating = Rating.objects.get(user_id=userID, recipe_id=id)
+                    rating.rating = form.cleaned_data["rating"]
+                    rating.save()
+                else:
+                    form.save()
             else:
                 print(form.errors.as_data())
             new_avg_rating = Rating.objects.filter(recipe_id = id).aggregate(Avg('rating'))
@@ -93,7 +97,7 @@ def show_recipe(request, userID, id):
                 
             context = {'recipe':recipe, 'form': form, 'user':user}
 
-            return render(request, "recipe/selected.html", context)
+            return HttpResponseRedirect("#")
         else:    
             recipe.delete()
             return redirect('/%i' % userID)
