@@ -10,6 +10,7 @@
 <p>Description: {{recipe.description}}</p>
 <p>Category: {{recipe.category}}</p>
 <p>User: {{recipe.user}}</p>
+<p>Tidsestimat: {{recipe.cooking_time}}</p>
 <p>Gjennomsnittlig rangering: {{recipe.avg_rating|floatformat:2}}</p>
 {%if recipe.user.id == user.id%}
 <!-- <form action="/{{user.id}}/" method="post">  -->

@@ -114,9 +114,12 @@ def editRecipe(request, id, userID):
     description = recipe.description
     public = recipe.public
     category = recipe.category
+    rating = recipe.avg_rating
+    print(f"RATING FØR:{rating}")
     picture = recipe.picture
+    cooking_time = recipe.cooking_time
     print(picture)
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user})
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user, 'avg_rating': rating, 'cooking_time': cooking_time})
 
     if(str(recipe.picture) != "/images/defaultRecipeImage.jpg"):
             recipe.picture.delete(False)
@@ -134,10 +137,14 @@ def editRecipe(request, id, userID):
             newRecipe.public = form.cleaned_data['public']
             newRecipe.category = form.cleaned_data["category"]
             newRecipe.picture = form.cleaned_data["picture"]
+            newRecipe.avg_rating = form.cleaned_data["avg_rating"]
+            newRecipe.cooking_time = form.cleaned_data["cooking_time"]
 
             newRecipe.save()
 
-    return render(request, 'recipeForm.html', {'form':form, 'user':user, "colorMode":colorMode })
+            print(f"RATING ETTER:{rating}")
+
+    return render(request, 'recipeForm.html', {'form':form, 'user':user, "colorMode":colorMode})
 
 
 def showFeed(request, userID):

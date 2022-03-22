@@ -45,7 +45,7 @@ Feed for alle offetilige oppskrifter
         </div>
         <div class="info">
             <h3>{{recipe.title}}</h3>
-            <p class="hashtag">#{{recipe.category}} </p>
+            <p class="hashtag">#{{recipe.category}} #{{recipe.cooking_time}}</p>
             <p>{{recipe.description}}</p>
             <!-- <img src = "{% static 'recipe/defaultRecipeImage.jpg' %}" /> -->
             <p>Forfatter: {{recipe.user}} | Publisert: {{recipe.publishedDate}} | Rangering: {{recipe.avg_rating|floatformat:2}}</p> 

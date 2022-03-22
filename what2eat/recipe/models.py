@@ -10,6 +10,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 CHOICES = [("breakfast", "Frokost"),("lunch", "Lunsj"), ("dinner", "Middag")]
 RATING = [(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
+COOKING_CHOICES = [("15 min", "15 min"), ("30 min", "30 min"), ("45 min", "45 min"), ("1 hour", "1 time"), ("1 hour 30 min", "1 time 30 min"), ("2+ hours", "2+ timer")]
 
 # Create your models here.
 class Recipe(models.Model):
@@ -22,6 +23,7 @@ class Recipe(models.Model):
     category = models.CharField(max_length=10,choices = CHOICES)
     avg_rating = models.FloatField(default=0.0)
     picture = models.ImageField(upload_to ="images", default = "/images/defaultRecipeImage.jpg")
+    cooking_time = models.CharField(max_length=20, choices=COOKING_CHOICES, default="----")
 
     def __str__(self):
         return self.title + self.category
