@@ -6,44 +6,88 @@
     margin: 0;
     background-color: #F7F7F7;
     font-family: Arial, Helvetica, sans-serif;
+    color: #232121;
   }
-  
+  /*logo*/
+  .top-container {
+    padding: 30px;
+    text-align: center;
+    font-family: Baloo;
+  }
+
   #w2e {
       color: #ee7f3e;
   }
+
+  /*menu*/
   .topnav {
     overflow: hidden;
     background-color: #202020;
     background-image: linear-gradient(to right, #363636 , #626262);
+    color: #e9e5e5;
   }
-  
   .topnav p {
       font-family: baloo;
-      color: #ddd;
       float: left;
       margin-left: 10px;
       text-align: center;
-  }
-  
+  } 
   .topnav a {
     float: left;
     display: block;
-    color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     float: right;
+
   }
   
-  .topnav a:hover {
-    background-color: #ddd;
-    height: 100%;
-    color: black;
+   /*menu light*/
+  .lightA:hover {
+    background-color: #f7f7f7;  
+    color: #232121;
   }
+  .light {
+    background-color: #f7f7f7;
+    color: #232121;
+  }
+
+  #lightmode{
+    background-color: #232121;
+    background-image: linear-gradient(to right, #232121 , #919090);
+    color: #e9e5e5;
+  }
+
+  /*menu dark*/
+  #darkmode{
+    background-color: #a3a2a3;
+    background-image: linear-gradient(to right, #a3a2a3 , #ffffff);
+    color: #232121;
+  }
+  .darkA:hover {
+    background-color: #232121;  
+    color: #f7f7f7;
+  } 
+  .dark {
+    background-color: #232121;
+    color: #e9e5e5;
+  }
+
+  /*menu sticky funsction*/
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .sticky + .row {
+    padding-top: 102px;
+  }
+
+  /*content*/
   .row {
       min-height: 200px;
+      padding: 16px;
   }
-  /* Clear floats after the columns */
   .row:after {
     content: "";
     display: table;
@@ -51,12 +95,14 @@
   }
   .header {
     background-color: #ffa291;
+    color:#202020;
+    font-weight: bold;
     padding: 10px;
     text-align: center;
     border-radius: 1px;
   }
 
-
+  /*WIP*/
   .catagory{
       background-color: #fff1ee;
       border-radius: 5px;
@@ -67,7 +113,6 @@
   .catagory:hover {
     background-color: #f8d7cf;
   }
-  
   
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
   @media screen and (max-width:600px) {

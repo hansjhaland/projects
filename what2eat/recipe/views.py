@@ -35,8 +35,10 @@ def show_all_recipes(request):
 
     
 def create_recipe(request, userID):
+    
     #print("Her er jeg")
     user = User.objects.get(id=userID)
+    colorMode = user.darkmode
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -61,17 +63,18 @@ def create_recipe(request, userID):
         # if a GET (or any other method) we'll create a blank form
         form = RecipeForm()
 
-    return render(request, 'recipeForm.html', {'form': form, 'user':user})
+    return render(request, 'recipeForm.html', {'form': form, 'user':user, "colorMode":colorMode})
 
 def show_recipe(request, userID, id):
     recipe = Recipe.objects.get(id=id)
     user = User.objects.get(id=userID)
+    colorMode = user.darkmode
 
     if request.method == 'POST':
         recipe.delete()
         return redirect('/%i' % userID)
 
-    return render(request, "recipe/selected.html", {"recipe":recipe, "user":user})
+    return render(request, "recipe/selected.html", {"recipe":recipe, "user":user, "colorMode":colorMode })
 
 def editRecipe(request, id, userID):
     recipe = Recipe.objects.get(id=id)
@@ -89,6 +92,8 @@ def editRecipe(request, id, userID):
     if(str(recipe.picture) != "/images/defaultRecipeImage.jpg"):
             recipe.picture.delete(False)
 
+    colorMode = user.darkmode
+    
     if (request.method == "POST"):
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -103,7 +108,7 @@ def editRecipe(request, id, userID):
 
             newRecipe.save()
 
-    return render(request, 'recipeForm.html', {'form':form, 'user':user})
+    return render(request, 'recipeForm.html', {'form':form, 'user':user, "colorMode":colorMode })
 
 
 def showFeed(request, userID):
@@ -111,7 +116,9 @@ def showFeed(request, userID):
     user = User.objects.get(id=userID)
     #return render(response, "feed.html", context)
     print(recipeList)
-    context = {'recipeList':recipeList, 'form': categoryForm(), 'user':user}
+    
+    colorMode = user.darkmode
+    context = {'recipeList':recipeList, 'form': categoryForm(), 'user':user, "colorMode":colorMode}
 
     if request.method == "POST":
         form = categoryForm(request.POST)

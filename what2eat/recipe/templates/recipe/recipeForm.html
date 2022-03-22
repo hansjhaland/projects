@@ -1,9 +1,19 @@
+<head>
+    <style>
+        .newrecipe {
+            background-color: #f7f7f7;
+            color: #232121;
+        }       
+    </style>
+</head>
+
 {% extends "user/base_wide.html"%}
 
 {%block page_title %}
 <h1>Her kan {{user}} skrive inn en oppskrift</h1>
 {%endblock%}
 
+{% block folder_name %}ny oppskrift{%endblock%}
 
 {% block content%}
 <form action="" method="post" enctype="multipart/form-data">
@@ -17,4 +27,25 @@
 
 
 {% endblock %}
+
+
+{%block script%}
+
+<script>
+    var newrecipe = document.querySelector("#newrecipe");
+
+    changeModeMysite();
+
+    function changeModeMysite(){
+        if (activeColorMode == "True"){
+            newrecipe.removeAttribute("class", "light");
+            newrecipe.setAttribute("class", "link darkA dark");
+         }
+        else {
+            newrecipe.removeAttribute("class", "dark");
+            newrecipe.setAttribute("class", "link lightA light");
+        }
+    }
+</script>
+{%endblock%}
 

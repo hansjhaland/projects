@@ -3,12 +3,13 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate # going to be used later
 from django.contrib.auth.forms import UserCreationForm
-from user.models import User
+from user.models import User, modeForm
 from user.models import UserForm
 # from user.models import Login
 from user.models import LoginForm
 from recipe.models import Recipe
 from django.core.exceptions import ValidationError
+
 
 # Create your views here.
 
@@ -36,10 +37,20 @@ def register(request):
 # def user(response, id):
 #     person = User.objects.get(id=id)
 #     return render(response, "user/user.html", {"name":(person.fname + ' ' + person.lname)})
-def user(response, id):
+def user(request, id):
     user = User.objects.get(id=id)
     recipeList = Recipe.objects.filter(user=id)
-    return render(response, "user/user.html", {"user":user, "recipeList":recipeList})
+    colorMode = user.darkmode
+    form = modeForm({'darkmode': colorMode})
+
+    if (request.method == "POST"):
+        form = modeForm(request.POST)
+        if form.is_valid():
+            user =  User.objects.get(id=id)
+            user.darkmode = form.cleaned_data["darkmode"]
+            user.save()
+            return HttpResponseRedirect('/'+str(user.id)+'/')
+    return render(request, "user/user.html", {"user":user, "recipeList":recipeList, "colorMode":colorMode, "form":form })
 
 def login(request):
     print("hellooo folkens")
@@ -61,11 +72,13 @@ def login(request):
         form = LoginForm()
         # print("Her er det noe feil")
     
-    return render(request, "login.html", {"form":form})
+    return render(request, "login.html", {"form":form })
 
 def listAllUsers(response):
     userList = User.objects.all()
     return render(response, "listOverUsers.html", {"userList":userList})
+
+
 
 
     

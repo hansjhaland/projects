@@ -1,5 +1,18 @@
-{% extends "user/base_wide.html" %}
+<!DOCTYPE html>
+<head>
+    <style>
+        .mysite {
+            background-color: #f7f7f7;
+            color: #232121;
+        }
+        
+    </style>
+</head>
+
+{% extends "user/base_sidenav.html"%}
 {% load static %}
+
+{% block folder_name %}min side{%endblock%}
 
 {% block header_info %}
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
@@ -7,9 +20,20 @@
 
 
 {% block page_title %}
-<h2>{{user.fname}} sin side</h2>
+ <h2>{{user.fname}} sin side</h2>
 {%endblock%}
 
+{% block sidenav_title %}
+ Mine valg
+{%endblock%}
+
+{% block sidenav %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p}} 
+        <input type="submit" value="Submit">
+    </form>
+{%endblock%}
 
 {% block content %}
 <h3>Mine oppskrifter:</h3>
@@ -33,3 +57,24 @@
         <p>Ingen oppskrifter å vise</p>
     {% endif %}
 {%endblock%}
+
+{%block script%}
+<script>
+    var mysite = document.querySelector("#mysite");
+
+    changeModeMysite();
+
+    function changeModeMysite(){
+        if (activeColorMode == "True"){
+            mysite.removeAttribute("class", "light");
+            mysite.setAttribute("class", "link darkA dark");
+            console.log("hal")
+         }
+        else {
+            mysite.removeAttribute("class", "dark");
+            mysite.setAttribute("class", "link lightA light");
+        }
+    }
+</script>
+{%endblock%}
+

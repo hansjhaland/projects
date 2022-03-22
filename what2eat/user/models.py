@@ -13,6 +13,7 @@ class User(models.Model):
     fname = models.CharField('Fornavn', max_length=200)
     lname = models.CharField('Etternavn',max_length=200)
     email = models.CharField('E-post', max_length=200)
+    darkmode = models.BooleanField(default=False)
 
     def __str__(self):
         return self.fname + " " + self.lname
@@ -30,6 +31,26 @@ class LoginForm(ModelForm):
         widgets = {
             'password': forms.PasswordInput() 
         }
+
+class modeForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['darkmode']
+
+
+class ColorMode(models.Model):
+    name = models.CharField(max_length=200)
+    active = models.BooleanField(default=False)
+
+    def getActive(self):
+        return self.active
+
+    def setActive(self, value):
+        self.active = value
+
+    def __str__(self):
+        return "colorMode: " + str(self.active)
+
 
 """
 class User(models.Model):
