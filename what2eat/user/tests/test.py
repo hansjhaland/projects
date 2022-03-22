@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import User
+from user.models import User
 from recipe.models import Recipe
 
 # Create your tests here.

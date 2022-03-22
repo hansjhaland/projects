@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>What2Eat</title>
+<title>{%block folder_name %}{%endblock%}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="{% static '/user/base_super.css' %}">
@@ -12,19 +12,77 @@
 {%endblock%}
 </head>
 <body>
+<div class="container">
+    <div class="top-container">
+       <h1>What<span id="w2e">2</span>Eat</h1>
+    </div>
+    <div class="topnav">
+        <p>What<span id="w2e">2</span>Eat</p>
+        <a class="link  lightA"  href="/">Logg ut</a>
+        <a class="link  lightA" id="mysite"  href="/{{user.id}}">Min profil</a>
+        <a class="link   lightA"  id="home" href="/{{user.id}}/feed/">Hjem</a>
+        <a class="link  lightA" id="newrecipe"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+    </div>
 
-<div class="topnav">
-    <p>What<span id="w2e">2</span>Eat</p>
-    <a href="/">Logg ut</a>
-    <a href="/{{user.id}}">Min profil</a>
-    <a href="/{{user.id}}/feed/">Hjem</a>
-    <a href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+    <div class="row"> 
+        {% block page_layout %}
+        {%endblock%}
+    </div>
 </div>
+<script>
+    var body = document.querySelector("body");
+    var topnav = document.querySelector(".topnav");
+    var linkEl = document.querySelectorAll('.link');
+    console.log(linkEl)
 
-<div class="row"> 
-    {% block page_layout %}
-    {%endblock%}
-</div>
+    var activeColorMode = '{{ colorMode }}';
+
+    if(activeColorMode == "True"){
+        changeMode();
+    }
+
+    function changeMode(){
+        if (activeColorMode == "True"){
+            body.style.backgroundColor="#232121";
+            body.style.color="#f7f7f7";
+            topnav.removeAttribute("id", "lightmode");
+            topnav.setAttribute("id", "darkmode");  
+            for(var i=0; i<4; i++){
+                linkEl[i].removeAttribute("class", "lightA");
+                linkEl[i].setAttribute("class", "link darkA");
+            }
+            
+        }
+        else{
+            body.style.backgroundColor="#f7f7f7";
+            body.style.color="#232121";   
+            topnav.removeAttribute("class", "darkmode");
+            topnav.setAttribute("class", "lightmode");  
+            for(var i=0; i<4; i++){
+                linkEl[i].removeAttribute("class", "darkA");
+                linkEl[i].setAttribute("class", "link lightA");
+            }      
+        }
+    }
+
+</script>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var topnav = document.querySelector(".topnav");
+    var sticky = topnav.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset > sticky) {
+        topnav.classList.add("sticky");
+    } else {
+        topnav.classList.remove("sticky");
+    }
+    }
+
+</script>
+
+{%block script%}{%endblock%}
 
 </body>
 </html>

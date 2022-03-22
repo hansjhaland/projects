@@ -21,6 +21,7 @@ class Recipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10,choices = CHOICES)
     avg_rating = models.FloatField(default=0.0)
+    picture = models.ImageField(upload_to ="images", default = "/images/defaultRecipeImage.jpg")
 
     def __str__(self):
         return self.title + self.category

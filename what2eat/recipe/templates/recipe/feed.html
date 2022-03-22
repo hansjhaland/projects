@@ -1,5 +1,16 @@
+<head>
+    <style>
+        .home {
+            background-color: #f7f7f7;
+            color: #232121;
+        }
+    </style>
+</head>
+
 {% extends "user/base_sidenav.html"%}
 {% load static %}
+
+{% block folder_name %}hjem{%endblock%}
 
 {% block header_info %} <!-- for linking other stylesheets etc --> 
     <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
@@ -7,7 +18,7 @@
 {%endblock%}
 
 {% block sidenav_title %}
-    <p>Filtrer etter kategorier</p>
+    Filtrer etter kategorier
 {%endblock%}
 
 {% block sidenav %} <!-- button linking to ex. new recipe -->
@@ -21,21 +32,49 @@
 
 
 {% block page_title%}
-<p>Feed for alle offetilige oppskrifter</p>
+Feed for alle offetilige oppskrifter
 {% endblock %}
 
 {% block content %}
  {%if recipeList %}
     {% for recipe in recipeList %}
     <a href="/{{user.id}}/recipe/{{recipe.id}}">
-    <div class="recipeItem">
-        <h3>{{recipe.title}}</h3>
-        <p>Publisert: {{recipe.publishedDate}}</p> 
-        <p>Forfatter: {{recipe.user}} </p>
-        <p>Rangering: {{recipe.avg_rating|floatformat:2}}</p>
+    <div class="recipeItem row">
+        <div class="image">
+            <img src="{{ recipe.picture.url }}" />
+        </div>
+        <div class="info">
+            <h3>{{recipe.title}}</h3>
+            <p class="hashtag">#{{recipe.category}} </p>
+            <p>{{recipe.description}}</p>
+            <!-- <img src = "{% static 'recipe/defaultRecipeImage.jpg' %}" /> -->
+            <p>Forfatter: {{recipe.user}} | Publisert: {{recipe.publishedDate}} | Rangering: {{recipe.avg_rating|floatformat:2}}</p> 
+        </div>
     </div></a>
     {% endfor %}
 {% else %}
     <p>Ingen oppskrifter å vise</p>
 {% endif %}
+{%endblock%}
+
+
+
+{%block script%}
+
+<script>
+    var home = document.querySelector("#home");
+
+    changeModeMysite();
+
+    function changeModeMysite(){
+        if (activeColorMode == "True"){
+            home.removeAttribute("class", "light");
+            home.setAttribute("class", "link darkA dark");
+         }
+        else {
+            home.removeAttribute("class", "dark");
+            home.setAttribute("class", "link lightA light");
+        }
+    }
+</script>
 {%endblock%}
