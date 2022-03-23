@@ -1,0 +1,15 @@
+{% if messages %}
+    {% for message in messages %}
+        <p class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</p>
+        
+    {% endfor %}
+   <script>
+       var bodyEl = document.querySelector("body");
+       var alertEl = document.querySelector(".alert");
+       var message = alertEl.innerHTML;
+       
+       alert(message);
+       bodyEl.removeChild(alertEl);
+   </script>
+
+{% endif %}

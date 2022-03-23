@@ -12,18 +12,20 @@
 {%endblock%}
 </head>
 <body>
-<div class="container">
-    <div class="top-container">
-       <h1>What<span id="w2e">2</span>Eat</h1>
-    </div>
-    <div class="topnav">
-        <p>What<span id="w2e">2</span>Eat</p>
-        <a class="link  lightA"  href="/">Logg ut</a>
-        <a class="link  lightA" id="mysite"  href="/{{user.id}}">Min profil</a>
-        <a class="link   lightA"  id="home" href="/{{user.id}}/feed/">Hjem</a>
-        <a class="link  lightA" id="newrecipe"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
-    </div>
+    
+    <div class="container">
+        <div class="top-container">
+            <h1>What<span id="w2e">2</span>Eat</h1>
+        </div>
+        <div class="topnav">
+            <p>What<span id="w2e">2</span>Eat</p>
+            <a class="link  lightA"  href="/">Logg ut</a>
+            <a class="link  lightA" id="mysite"  href="/{{user.id}}">Min profil</a>
+            <a class="link   lightA"  id="home" href="/{{user.id}}/feed/">Hjem</a>
+            <a class="link  lightA" id="newrecipe"  href="/{{user.id}}/recipe/form">Ny oppskrift</a>
+        </div>
 
+        {% include 'messages.html' %}
     <div class="row"> 
         {% block page_layout %}
         {%endblock%}
@@ -84,5 +86,7 @@
 
 {%block script%}{%endblock%}
 
+
 </body>
+
 </html>

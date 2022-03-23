@@ -9,6 +9,8 @@ from user.models import UserForm
 from user.models import LoginForm
 from recipe.models import Recipe
 from django.core.exceptions import ValidationError
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -25,10 +27,8 @@ def register(request):
                 form.save()               
                 return HttpResponseRedirect('/')
             else:
-                raise form.ValidationError(
-                    ('Username exists'),
-                    code = 'invalid',
-                )
+                messages.success(request, "Brukernavn finnes i systemet")
+
     else:
         form = UserForm()
     
@@ -64,6 +64,14 @@ def login(request):
                 user = User.objects.get(username = input_username)
                 if user.password == input_password:
                     return HttpResponseRedirect('/%i' % user.id)
+                else:
+                    print("Heieieiei")
+                    messages.error(request, ("Feil passord"))
+            else: 
+                print("Her skal det viese en popip")
+                messages.error(request, ("Brukernavnet finnes ikke i databasen"))
+
+
             
     # user = User.objects.filter(id = id)
     # if( request.method == "post"):
