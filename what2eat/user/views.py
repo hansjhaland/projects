@@ -24,7 +24,9 @@ def register(request):
             form_data = form.cleaned_data
             input_username = form_data['username']
             if User.objects.filter(username = input_username).exists() == False:
-                form.save()               
+                form.save()      
+                messages.success(request, ("Bruker opprettet"))
+         
                 return HttpResponseRedirect('/')
             else:
                 messages.success(request, "Brukernavn finnes i systemet")

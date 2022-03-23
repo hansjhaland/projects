@@ -60,6 +60,8 @@ def create_recipe(request, userID):
 
             form.save()
             # redirect to a new URL, This gets overidden by on action in html if anything is written there
+            messages.error(request, ("Oppskrift opprettet"))
+
             return HttpResponseRedirect("/"+form.data["user"]+ "/")
         else:
             messages.error(request, "Det gikk ikke å lage en oppskrift")
@@ -104,7 +106,7 @@ def show_recipe(request, userID, id):
             return HttpResponseRedirect("#")
         else:    
             recipe.delete()
-            messages.success(request, "Dua har slettet oppskriften")
+            messages.success(request, "Du har slettet oppskriften")
             return redirect('/%i' % userID)
 
     return render(request, "recipe/selected.html", context)
@@ -146,6 +148,7 @@ def editRecipe(request, id, userID):
             newRecipe.cooking_time = form.cleaned_data["cooking_time"]
 
             newRecipe.save()
+            messages.error(request, ("Du har endret oppskriften"))
 
             print(f"RATING ETTER:{rating}")
 
