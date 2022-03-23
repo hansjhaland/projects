@@ -1,3 +1,4 @@
+
 from tkinter import HIDDEN, Widget
 from turtle import title
 from unicodedata import category
@@ -13,7 +14,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
     publishedDate = models.DateTimeField("date published", auto_now_add=True)
     ingredients = models.CharField(max_length=300)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=500)
     method = models.CharField(max_length=10000, default="")
     public = models.BooleanField(default=False) # if true, the recipe should show up in the public feed
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -29,10 +30,20 @@ class RecipeForm(ModelForm):
         model = Recipe
         fields = "__all__"
         #exclude = ["user"]
+        labels = {
+            'title': 'Oppskriftens tittel',
+            'ingredients': 'Ingredienser (separer med komma)',
+            'description': 'Kort beskrivelse av oppskriften',
+            'method': 'Fremgangsmåte',
+            'public': 'Ønsker du at oppskriften skal være offentlig? JA',
+            'category': 'Velg en kategori',
+            'picture': 'Velg et bilde',
+        }
         widgets = {
              "user": forms.HiddenInput(),
-             "method": forms.Textarea()
+             "method": forms.Textarea(),
         }
+        
         #fields = ["title", "publishedDate", "ingredients", "description"]
 
 class categoryForm(forms.Form):
