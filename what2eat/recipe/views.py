@@ -1,8 +1,10 @@
+from email import message
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import RatingForm, Recipe, RecipeForm, categoryForm, Rating
 from user.models import User
 from django.db.models import Avg
+from django.contrib import messages
 
 # Create your views here.
 
@@ -58,7 +60,11 @@ def create_recipe(request, userID):
 
             form.save()
             # redirect to a new URL, This gets overidden by on action in html if anything is written there
+            messages.error(request, ("Oppskrift opprettet"))
+
             return HttpResponseRedirect("/"+form.data["user"]+ "/")
+        else:
+            messages.error(request, "Det gikk ikke å lage en oppskrift")
 
     else:
         # if a GET (or any other method) we'll create a blank form
@@ -100,6 +106,7 @@ def show_recipe(request, userID, id):
             return HttpResponseRedirect("#")
         else:    
             recipe.delete()
+            messages.success(request, "Du har slettet oppskriften")
             return redirect('/%i' % userID)
 
     return render(request, "recipe/selected.html", context)
@@ -141,6 +148,7 @@ def editRecipe(request, id, userID):
             newRecipe.cooking_time = form.cleaned_data["cooking_time"]
 
             newRecipe.save()
+            messages.error(request, ("Du har endret oppskriften"))
 
             print(f"RATING ETTER:{rating}")
 
