@@ -1,4 +1,5 @@
 from email import message
+from distutils.dep_util import newer_pairwise
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import RatingForm, Recipe, RecipeForm, categoryForm, Rating
@@ -118,6 +119,7 @@ def editRecipe(request, id, userID):
     title = recipe.title
     publishedDate = recipe.publishedDate
     ingredients = recipe.ingredients
+    method = recipe.method
     description = recipe.description
     public = recipe.public
     category = recipe.category
@@ -126,7 +128,7 @@ def editRecipe(request, id, userID):
     picture = recipe.picture
     cooking_time = recipe.cooking_time
     print(picture)
-    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user, 'avg_rating': rating, 'cooking_time': cooking_time})
+    form = RecipeForm({'title': title, 'publishedDate':publishedDate, 'ingredients':ingredients, 'public':public, 'category':category, 'description':description, 'picture':picture, 'user':user, 'avg_rating': rating, 'cooking_time': cooking_time, 'method':method})
 
     if(str(recipe.picture) != "/images/defaultRecipeImage.jpg"):
             recipe.picture.delete(False)
@@ -146,6 +148,7 @@ def editRecipe(request, id, userID):
             newRecipe.picture = form.cleaned_data["picture"]
             newRecipe.avg_rating = form.cleaned_data["avg_rating"]
             newRecipe.cooking_time = form.cleaned_data["cooking_time"]
+            newRecipe.method = form.cleaned_data["method"]
 
             newRecipe.save()
             messages.error(request, ("Du har endret oppskriften"))

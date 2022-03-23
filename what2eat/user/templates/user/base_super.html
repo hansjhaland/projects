@@ -33,6 +33,7 @@
 </div>
 <script>
     var body = document.querySelector("body");
+    var a = document.querySelectorAll("a");
     var topnav = document.querySelector(".topnav");
     var linkEl = document.querySelectorAll('.link');
     console.log(linkEl)
@@ -47,6 +48,7 @@
         if (activeColorMode == "True"){
             body.style.backgroundColor="#232121";
             body.style.color="#f7f7f7";
+            a.color="#f7f7f7";
             topnav.removeAttribute("id", "lightmode");
             topnav.setAttribute("id", "darkmode");  
             for(var i=0; i<4; i++){

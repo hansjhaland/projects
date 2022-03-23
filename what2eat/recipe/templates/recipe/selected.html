@@ -1,17 +1,41 @@
-{% extends "user/base_wide.html"%}
+{% extends "user/base_sidenav.html"%}
+
+{% load static %}
+{% block header_info %} <!-- for linking other stylesheets etc --> 
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/feedStyling.css' %}">
+{%endblock%}
 
 {% block page_title%}
 <h2>{{recipe.title}}</h2>
 {%endblock%}
 
+{% block sidenav_title%}
+<h2>Ingredienser</h2>
+{%endblock%}
+{% block sidenav %}
+<div class="ingredient">
+    <p id="stringIngredients"> {{recipe.ingredients}}</p>
+</div>
+{%endblock%}
+ 
 {% block content%}
-<p>{{recipe.publishedDate}}</p>
-<p>Ingredients: {{recipe.ingredients}}</p>
-<p>Description: {{recipe.description}}</p>
-<p>Category: {{recipe.category}}</p>
-<p>User: {{recipe.user}}</p>
-<p>Tidsestimat: {{recipe.cooking_time}}</p>
-<p>Gjennomsnittlig rangering: {{recipe.avg_rating|floatformat:2}}</p>
+<div class="row">
+    <div class="image">
+        <img src="{{ recipe.picture.url }}" />
+    </div>
+    <div class="space">
+        <p class="hashtag">#{{recipe.category}} #{{recipe.cooking_time}}</p>
+        <p><i>  {{recipe.description}}</i></p>
+    </div>
+</div>
+<div class="row">
+    <h3>Fremgangsmåte</h3>
+    <div class="methodDiv">
+        <p id="stringMethod">{{recipe.method}}</p>
+    </div>
+    <hr>
+    <p>{{recipe.user}}  |  {{recipe.publishedDate}} | {{recipe.avg_rating|floatformat:2}}</p>
+</div>
 {%if recipe.user.id == user.id%}
 <!-- <form action="/{{user.id}}/" method="post">  -->
 <form action="" method="post"> 
@@ -28,4 +52,41 @@
     <input type="submit", name="rate", value="Lagre rangering">
 </form>
 {%endif%}
+{%endblock%}
+
+{%block script%}
+<script>
+    var ingredientEl = document.querySelector(".ingredient");
+    var stringIngredients = document.querySelector("#stringIngredients");
+    var ingredients = stringIngredients.innerHTML;
+    console.log(ingredients);
+    var list = ingredients.split(',');
+    console.log(list);
+    var ingredientsEl = document.createElement("ul");
+
+    for (var i=0; i < list.length; i++){
+        var ing = document.createElement("li");
+        ing.innerHTML=list[i];
+        ingredientsEl.appendChild(ing);
+    }
+    ingredientEl.removeChild(stringIngredients);
+    ingredientEl.appendChild(ingredientsEl);
+
+    var methodDivEl = document.querySelector(".methodDiv");
+    var stringMethod = document.querySelector("#stringMethod");
+    var method = stringMethod.innerHTML;
+    console.log(method);
+    var methodList = method.split('\n');
+    console.log(methodList);
+    var methodListEl = document.createElement("ol");
+
+    for (var i=0; i < methodList.length; i++){
+        var step = document.createElement("li");
+        step.innerHTML=methodList[i];
+        methodListEl.appendChild(step);
+    }
+    methodDivEl.removeChild(stringMethod);
+    methodDivEl.appendChild(methodListEl);
+
+</script>
 {%endblock%}

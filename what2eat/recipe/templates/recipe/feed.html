@@ -4,6 +4,7 @@
             background-color: #f7f7f7;
             color: #232121;
         }
+
     </style>
 </head>
 
@@ -32,7 +33,7 @@
 
 
 {% block page_title%}
-Feed for alle offetilige oppskrifter
+<h2>Feed for alle offetilige oppskrifter</h2>
 {% endblock %}
 
 {% block content %}
@@ -63,6 +64,7 @@ Feed for alle offetilige oppskrifter
 
 <script>
     var home = document.querySelector("#home");
+    var recipeItem = document.querySelector(".recipeItem");
 
     changeModeMysite();
 
@@ -73,7 +75,7 @@ Feed for alle offetilige oppskrifter
          }
         else {
             home.removeAttribute("class", "dark");
-            home.setAttribute("class", "link lightA light");
+            recipeItem.removeAttribute("id", "darkColor");  
         }
     }
 </script>

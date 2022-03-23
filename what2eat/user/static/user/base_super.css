@@ -39,11 +39,14 @@
     padding: 14px 16px;
     text-decoration: none;
     float: right;
-
+    color: #232121;
   }
   
    /*menu light*/
-  .lightA:hover {
+   .lightA {  
+    color: #232121;
+  }
+   .lightA:hover {
     background-color: #f7f7f7;  
     color: #232121;
   }
@@ -63,6 +66,9 @@
     background-color: #a3a2a3;
     background-image: linear-gradient(to right, #a3a2a3 , #ffffff);
     color: #232121;
+  }
+  .darkA{
+    color: #f7f7f7;
   }
   .darkA:hover {
     background-color: #232121;  
@@ -85,7 +91,7 @@
 
   /*content*/
   .row {
-      min-height: 200px;
+      min-height: 100px;
       padding: 16px;
   }
   .row:after {
@@ -170,4 +176,9 @@
   button:hover{
     background-color: #f88f7c;
   }
+  input[type=textarea], textarea{
+    min-width: 400px;
+  }
+   
+
 
