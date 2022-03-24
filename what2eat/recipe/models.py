@@ -65,7 +65,7 @@ class categoryForm(forms.Form):
     option = forms.ChoiceField(choices=CHOICES, label="", widget=forms.RadioSelect)
 
 class RatingForm(ModelForm):
-    rating = forms.ChoiceField(choices=RATING, label="rating", widget=forms.RadioSelect)
+    rating = forms.ChoiceField(choices=RATING, label="Rangering", widget=forms.RadioSelect)
     rating_form = forms.BooleanField(widget=forms.HiddenInput, initial=True)
 
     class Meta:
