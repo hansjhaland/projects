@@ -13,7 +13,7 @@ class User(models.Model):
     fname = models.CharField('Fornavn', max_length=200)
     lname = models.CharField('Etternavn',max_length=200)
     email = models.CharField('E-post', max_length=200)
-    darkmode = models.BooleanField(default=False)
+    darkmode = models.BooleanField('Mørkt tema',default=False)
 
     def __str__(self):
         return self.fname + " " + self.lname
