@@ -1,5 +1,6 @@
 from email import message
 from distutils.dep_util import newer_pairwise
+from turtle import colormode
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import RatingForm, Recipe, RecipeForm, categoryForm, Rating
@@ -183,7 +184,7 @@ def showFeed(request, userID):
             if (option.get('option') == "dinner"):
                 recipeList = Recipe.objects.filter(category="dinner", public=True)
             print(recipeList)
-            context = {'recipeList': recipeList, "form":categoryForm(), 'user':user}
+            context = {'recipeList': recipeList, "form":categoryForm(), 'user':user, 'colorMode':colorMode}
         return render(request, "feed.html", context)
 
 
