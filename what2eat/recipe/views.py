@@ -61,11 +61,11 @@ def create_recipe(request, userID):
 
             form.save()
             # redirect to a new URL, This gets overidden by on action in html if anything is written there
-            messages.error(request, ("Oppskrift opprettet"))
+            messages.success(request, ("Oppskrift opprettet"))
 
             return HttpResponseRedirect("/"+form.data["user"]+ "/")
         else:
-            messages.error(request, "Det gikk ikke å lage en oppskrift")
+            messages.success(request, "Det gikk ikke å lage en oppskrift")
 
     else:
         # if a GET (or any other method) we'll create a blank form

@@ -131,4 +131,8 @@
   button:hover{
     background-color: #f88f7c;
   }
-
+ 
+  .alert{
+    display: none;
+  }
+   
