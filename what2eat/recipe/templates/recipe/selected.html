@@ -23,7 +23,7 @@
     <div class="image">
         <img src="{{ recipe.picture.url }}" />
     </div>
-    <div class="space">
+    <div class="info">
         <p class="hashtag">#{{recipe.category}} #{{recipe.cooking_time}}</p>
         <p><i>  {{recipe.description}}</i></p>
     </div>
@@ -42,7 +42,7 @@
     {% csrf_token %}
     <input type="submit", name="delete", value="Slett">
 </form>
-<a href="/{{user.id}}/recipe/{{recipe.id}}/edit/"><button> Edit </button></a>
+<a href="/{{user.id}}/recipe/{{recipe.id}}/edit/"><button> Rediger </button></a>
 {% else %}
 <form action="" method="post">
     {% csrf_token %}
