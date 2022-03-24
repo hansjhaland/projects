@@ -179,6 +179,9 @@
   input[type=textarea], textarea{
     min-width: 400px;
   }
+  .alert{
+    display: none;
+  }
    
 
 
