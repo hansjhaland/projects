@@ -39,19 +39,14 @@
     padding: 14px 16px;
     text-decoration: none;
     float: right;
-    color: #232121;
+  }
+  a{
+    color: inherit;
   }
   
    /*menu light*/
-   .lightA {  
-    color: #232121;
-  }
    .lightA:hover {
     background-color: #f7f7f7;  
-    color: #232121;
-  }
-  .light {
-    background-color: #f7f7f7;
     color: #232121;
   }
 
@@ -67,17 +62,12 @@
     background-image: linear-gradient(to right, #a3a2a3 , #ffffff);
     color: #232121;
   }
-  .darkA{
-    color: #f7f7f7;
-  }
+
   .darkA:hover {
     background-color: #232121;  
     color: #f7f7f7;
   } 
-  .dark {
-    background-color: #232121;
-    color: #e9e5e5;
-  }
+
 
   /*menu sticky funsction*/
   .sticky {

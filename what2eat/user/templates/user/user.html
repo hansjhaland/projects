@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <head>
     <style>
-        .mysite {
+        .mysiteLight {
             background-color: #f7f7f7;
             color: #232121;
+        }
+        .mysiteDark {
+            background-color: #232121;
+            color: #f7f7f7;
         }
         
     </style>
@@ -66,13 +70,12 @@
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            mysite.removeAttribute("class", "light");
-            mysite.setAttribute("class", "link darkA dark");
-            console.log("hal")
+            mysite.removeAttribute("class", "mysiteLight");
+            mysite.setAttribute("class", "link darkA mysiteDark");
          }
         else {
-            mysite.removeAttribute("class", "dark");
-            mysite.setAttribute("class", "link lightA light");
+            mysite.removeAttribute("class", "mysiteDark");
+            mysite.setAttribute("class", "link lightA mysiteLight");
         }
     }
 </script>

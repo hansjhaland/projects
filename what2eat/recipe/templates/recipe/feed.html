@@ -1,8 +1,12 @@
 <head>
     <style>
-        .home {
+        .homeLight {
             background-color: #f7f7f7;
             color: #232121;
+        }
+        .homeDark {
+            background-color: #232121;
+            color: #f7f7f7;
         }
 
     </style>
@@ -70,12 +74,13 @@
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            home.removeAttribute("class", "light");
-            home.setAttribute("class", "link darkA dark");
+            home.removeAttribute("class", "homeLight ");
+            home.setAttribute("class", "link darkA homeDark");
          }
         else {
-            home.removeAttribute("class", "dark");
-            recipeItem.removeAttribute("id", "darkColor");  
+            home.removeAttribute("class", "homeDark");
+            home.setAttribute("class", "link lightA homeLight");
+
         }
     }
 </script>

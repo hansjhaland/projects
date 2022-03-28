@@ -51,6 +51,7 @@ class RecipeForm(ModelForm):
             'public': 'Ønsker du at oppskriften skal være offentlig? JA',
             'category': 'Velg en kategori',
             'picture': 'Velg et bilde',
+            'cooking_time':'Tilberedningstid',
         }
         widgets = {
              "user": forms.HiddenInput(),

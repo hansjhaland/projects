@@ -1,9 +1,13 @@
 <head>
     <style>
-        .newrecipe {
+        .recipeLight {
             background-color: #f7f7f7;
             color: #232121;
-        }       
+        }
+        .recipeDark {
+            background-color: #232121;
+            color: #f7f7f7;
+        }     
     </style>
 </head>
 
@@ -38,12 +42,12 @@
 
     function changeModeMysite(){
         if (activeColorMode == "True"){
-            newrecipe.removeAttribute("class", "light");
-            newrecipe.setAttribute("class", "link darkA dark");
+            newrecipe.removeAttribute("class", "recipeLight");
+            newrecipe.setAttribute("class", "link darkA recipeDark");
          }
         else {
-            newrecipe.removeAttribute("class", "dark");
-            newrecipe.setAttribute("class", "link lightA light");
+            newrecipe.removeAttribute("class", "recipeDark");
+            newrecipe.setAttribute("class", "link lightA recipeLight");
         }
     }
 </script>
