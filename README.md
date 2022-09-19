@@ -1,7 +1,4 @@
-# pu-gruppe 47
-
-hei alle sammen :)
-
+# Readme
 
 successfully started a django project
 - to run it simply navigate to outer what2eat folder and write "python manage.py runserver" in terminal 
